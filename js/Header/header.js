@@ -1,14 +1,17 @@
+// module
+import { validateBasic } from "../validation.js";
+
+// variables
 const form = document.querySelector('.search_form');
 const headerInput = document.querySelector('.search_input');
 
 // 검색 시 일어날 일들 (input 데이터 검사 / fetch)
 form.addEventListener('submit', (e) => {
-  e.preventDefault()
-  headerInput.value === '비속어다' ?
-    alert('비속어 안 됨')
-    : null;
+  e.preventDefault();
+  validateBasic(headerInput.value) !== true
+    ? alert('검색어를 입력하세요')
+    : console.log('fetch가 될 예정')
 })
-
 
 
 
