@@ -6,6 +6,7 @@ export function routing(router) {
 
   if (!matched) {
     console.log('not matched');
+    return;
   }
   return matched.render();
 }
