@@ -1,3 +1,17 @@
+const form = document.querySelector('.search_form');
+const headerInput = document.querySelector('.search_input');
+
+// 검색 시 일어날 일들 (input 데이터 검사 / fetch)
+form.addEventListener('submit', (e) => {
+  e.preventDefault()
+  headerInput.value === '비속어다' ?
+    alert('비속어 안 됨')
+    : null;
+})
+
+
+
+
 // 브라우저 창에서 keydown 이벤트가 발생 시
 window.addEventListener('keydown', (e) => {
   // dataset 속성의 값이 지금 누른 키와 같은 요소를 찾고 
