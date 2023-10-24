@@ -1,0 +1,30 @@
+const form = document.querySelector('.search_form');
+const headerInput = document.querySelector('.search_input');
+
+// 검색 시 일어날 일들 (input 데이터 검사 / fetch)
+form.addEventListener('submit', (e) => {
+  e.preventDefault()
+  headerInput.value === '비속어다' ?
+    alert('비속어 안 됨')
+    : null;
+})
+
+
+
+
+// 브라우저 창에서 keydown 이벤트가 발생 시
+window.addEventListener('keydown', (e) => {
+  // dataset 속성의 값이 지금 누른 키와 같은 요소를 찾고 
+  const slash = document.querySelector(`input[data-key = ${e.code}]`)
+  // 요소가 없다면 아무 일도 일어나지 않음
+  if (!slash) return;
+
+  // 요소가 있다면 그 요소에 focus 하고
+  slash.focus();
+
+  // 찾은 요소에 transition이 시작 될 때
+  slash.addEventListener('transitionstart', () => {
+    // value를 비워준다.
+    slash.value = ''
+  })
+})
