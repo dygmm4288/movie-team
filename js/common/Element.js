@@ -6,9 +6,9 @@ export class Element {
     return this.element;
   }
   remove() {
-    this.events.forEach((eventObject) => {
+    /* this.events.forEach((eventObject) => {
       const { type, element, handlerFunc } = eventObject;
       element.removeEventListener(type, handlerFunc);
-    });
+    }); */
   }
 }
