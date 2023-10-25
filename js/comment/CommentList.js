@@ -1,15 +1,18 @@
 import { Element } from '../common/Element.js';
 import { getStorage, setStorage } from '../storage.js';
 import { append, create, select } from '../util.js';
+import { validateBasic } from '../validation.js';
 
 export function CommentList(id) {
   return new Element(() => {
     const $listWrapper = create('ul', 'comment-list-wrapper');
     const commentLists = getStorage(id);
     let commentItems = [];
-
+    // updateComment(commetId:name,commentText: text)
     const updateComment = (commentId, commentText) => {
+      console.log(commentId, commentText);
       const comments = getStorage(id);
+
       if (!comments) return null;
       const nextComments = comments.map((comment) => {
         if (comment.id !== commentId) return comment;
@@ -18,30 +21,27 @@ export function CommentList(id) {
           comment: commentText,
         };
       });
-      if (!success) {
-        console.error('변경에 실패했습니다.');
-        return null;
-      }
       setStorage(id, nextComments);
       render(nextComments);
     };
     const removeComment = (commentId, password) => {
       const comments = getStorage(id);
-      if (!comments) return null;
+      if (!comments) return;
       let success = false;
       let nextComments = comments.filter((comment) => {
         if (comment.id === commentId) {
           if (password === comment.password) {
             success = true;
-            return true;
+            return false;
           }
-          return false;
+          return true;
         }
-        return false;
+        return true;
       });
       if (!success) {
         console.error('삭제에 실패했습니다.');
-        return null;
+        alert('비밀번호가 일치하지 않습니다!');
+        return;
       }
       setStorage(id, nextComments);
       render(nextComments);
@@ -49,7 +49,6 @@ export function CommentList(id) {
     const render = (commentLists) => {
       commentItems.forEach((commentItem) => commentItem.remove());
       $listWrapper.innerHTML = '';
-
       commentItems = commentLists.map(({ comment, id, password, nickname }) => {
         const item = CommentListItem(
           id,
@@ -59,7 +58,7 @@ export function CommentList(id) {
           updateComment,
           removeComment,
         );
-        $listWrapper.innerHTML += item.render().outerHTML;
+        $listWrapper.appendChild(item.render());
         return item;
       });
     };
@@ -84,7 +83,7 @@ function CommentListItem(
 
     const $controlWrapper = create('div', 'control-wrapper');
     const $nickSpan = create('span', 'comment-span');
-    const $updateBtn = create('div', 'comment-update-btn');
+    const $updateBtn = create('button', 'comment-update-btn');
     const $removeBtn = create('button', 'comment-remove-btn');
 
     $comment.innerText = comment;
@@ -93,7 +92,7 @@ function CommentListItem(
     $nickSpan.innerText = nickname;
 
     function convert(a, b) {
-      // remove a and b insert
+      // remove a and b insert after begin
       a.remove();
       $commentItem.insertAdjacentElement('afterbegin', b);
     }
@@ -113,49 +112,53 @@ function CommentListItem(
         password,
       );
       $modalWrapper.innerHTML = '';
-      append($modalWrapper, $modalForm);
+
+      append($modalWrapper, $modalForm.render());
     }
 
     const handleUpdate = () => {
       // update를 하기 위해서는
       // 업데이트하고자 하는 텍스트로 변경이 되어야 한다.
-      const isCanUpdate =
-        $commentItem.querySelector('comment-desc').tagName === 'p';
-      const prevValue = $updateComment.innerText;
+
+      const isCanUpdate = $commentItem.querySelector('p');
+      const prevValue = $comment.innerText;
       if (isCanUpdate) {
         // "수정" 상태라면
         enrollModalForm(() => {
-          $updateComment.innerText = $comment.innerText;
+          $updateComment.value = $comment.innerText;
           convert($comment, $updateComment);
+          $updateBtn.innerText = '수정 완료';
+          handlerCancleButton();
         });
+
         return;
       }
       // 이미 변화돼어있는 상태라면
 
-      const nextValue = $updateComment.innerText;
-      if (prevValue === nextValue) {
+      const nextValue = $updateComment.value;
+      $updateBtn.innerText = '수정';
+      convert($comment, $updateComment);
+      if (prevValue === nextValue || !validateBasic(nextValue)) {
         // 내용의 변화가 없다면
-        convert($comment, $updateComment);
+        $comment.innerText = prevValue;
+        convert($updateComment, $comment);
         return;
       }
       // 내용의 변화가 있다면
-      updateComment(id, comment);
+      updateComment(id, nextValue);
     };
     const handleRemove = () => {
       enrollModalForm(() => {
         // 여기서는 만약 비밀번호가 일치한다면
-        removeComment(id);
+        removeComment(id, password);
+        handlerCancleButton();
       });
     };
     const handlerCancleButton = () => {
       $modalWrapper.innerHTML = '';
     };
 
-    // $updateBtn.addEventListener('click', handleUpdate);
-    $updateBtn.onclick = function (e) {
-      console.log(e);
-    };
-    console.log($updateBtn.onclick);
+    $updateBtn.addEventListener('click', handleUpdate);
     $removeBtn.addEventListener('click', handleRemove);
     append($controlWrapper, [$updateBtn, $removeBtn]);
     append($commentItem, [$comment, $controlWrapper]);
@@ -219,9 +222,11 @@ function CommentConfirmForm(controlFunction, handlerCancleButton, password) {
     };
     $form.addEventListener('submit', handlerConfirmButton);
     $cancleButton.addEventListener('click', handlerCancleButton);
+
+    append($form, [$input, $submitButton, $cancleButton]);
+    return [$form];
   });
 }
-function nothing() {}
 
 /* 
 <ul class="comment-list-wrapper">
