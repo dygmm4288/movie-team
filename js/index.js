@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+import { CommentList } from './comment/CommentList.js';
+
+// document.body.insertAdjacentElement('afterbegin', Comment(123).render());
+document.querySelector('#detail-page').append(CommentList(123).render());
+=======
 
 const API_KEY = 'api_key=c929b1fb9912e2f89022f61946d45cac';
 const BASE_URL = 'https://api.themoviedb.org/3'
@@ -48,3 +54,4 @@ function showMovies(data) {
     main.appendChild(movieEl);
   });
 }
+>>>>>>> 1884251a6cc6d5a67fe5bea81e67d430b9311924
