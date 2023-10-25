@@ -14,7 +14,6 @@ export function Comment(id) {
       placeholder: '댓글을 작성해주세요',
     });
     const $userInfoDiv = create('div', 'user-info-container');
-
     const $nickInput = create('input', 'user-info-item', 'nickname', {
       type: 'text',
       placeholder: '닉네임을 입력해주세요',
@@ -36,14 +35,12 @@ export function Comment(id) {
       type: 'submit',
     });
     $submitButton.innerText = '등록';
-
     // 이벤트 핸들러
     const errorHandler = () => {
       alert('error');
     };
     const handleEnrollComment = (e) => {
       e.preventDefault();
-
       // 유효성 검사
       console.log(
         !validateComment($commentInput.value),
@@ -58,13 +55,11 @@ export function Comment(id) {
         $passwordInput.value !== $confirmPasswordInput.value
       )
         return errorHandler();
-
       const [nickname, password, comment] = [
         $nickInput,
         $passwordInput,
         $commentInput,
       ].map((v) => v.value);
-
       if (!getStorage(id)) {
         setStorage(id, []);
       }
@@ -73,7 +68,6 @@ export function Comment(id) {
         getStorage(id).concat({ id: Date.now(), nickname, password, comment }),
       );
     };
-
     // 이벤트 할당
     $form.addEventListener('submit', handleEnrollComment);
 
@@ -92,14 +86,14 @@ export function Comment(id) {
     ];
   });
 }
-
-/* 
-<form class="comment-form-container">
-    <input type="text" class="primary-input" id="comment/>
-    <div class="user-info-container">
-        <input type="text" class="user-info-item" id="nickname"/>
-        <input type="password" class="user-info-item" id="password"/>
-        <input type="password" class="user-info-item" id="confiromPassword"/>
-    </div>    
+/*
+<form class=“comment-form-container”>
+    <input type=“text” class=“primary-input” id=“comment/>
+    <div class=“user-info-container”>
+        <input type=“text” class=“user-info-item” id=“nickname”/>
+        <input type=“password” class=“user-info-item” id=“password”/>
+        <input type=“password” class=“user-info-item” id=“confiromPassword”/>
+    </div>
+    <button class="comment-btn" type="submit">등록</button>
 </form>
 */
