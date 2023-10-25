@@ -6,38 +6,34 @@
     <link rel="stylesheet" href="./css/theme/theme.css" />
     <link rel="stylesheet" href="./css/theme/theme.dark.css" />
     <link rel="stylesheet" href="./css/theme/moviedetail.css" />
+    <script src="./js/moviedetail.js" defer></script>
+    <link rel="stylesheet" href="css/cardlist.css" />
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/Header/header.js" type="module"></script>
+    <script src="./js/index.js" type="module"></script>
     <title>영화 검색 사이트</title>
   </head>
   <body>
-    <div class="movie-cover">
-      <!-- <div class="movie-card">
-        <div class="movie-img-box">
-          <div class="movie-img">
-            <img
-              src="https://search1.kakaocdn.net/thumb/C146x211.fwebp.q100/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F8a87a8c7a462e24cb77b63b10d1497966f7c6210"
-              class="display-medium on-primary front-card"
-              art="..." />
-            <div class="tertiary back-card">♥</div>
-          </div>
-        </div>
-        <div class="title-large tertiary-container-text movie-body1">
-          <div class="text-gap">영화제목</div>
-          <div class="text-gap">영화개봉일</div>
-          <div class="text-gap">영화장르</div>
-          <div class="text-gap">영화평점</div>
-        </div>
-        <div class="title-large tertiary-container-text movie-body2">
-          <div class="text-gap">30일</div>
-          <div class="text-gap">2023.10.03</div>
-          <div class="text-gap">코미디</div>
-          <div class="text-gap">★ 8.14</div>
-        </div>
+    <header id="header-container" class="primary-container">
+      <div class="logo">
+        <a href="/"><h1>로고</h1></a>
       </div>
-      <div class="movie-summary">
-        <div class="headline-medium tertiary-container-text">줄거리</div>
-        <p class="body-large secondary-container-text">요기는 줄거리</p>
-      </div> -->
+      <div class="search-container">
+        <form class="search-form">
+          <input
+            class="search-input"
+            data-key="Slash"
+            type="text"
+            placeholder="영화 제목을 검색하세요.." />
+          <button class="search-icon">🧭</button>
+        </form>
+      </div>
+      <div></div>
+    </header>
+    <div>
+      <main id="main"></main>
+<div class="movie-cover">
     </div>
-    <script src="./js/moviedetail.js"></script>
+    <script src="/js/index.js"></script>
   </body>
 </html>
