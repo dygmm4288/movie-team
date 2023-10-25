@@ -12,19 +12,10 @@
   align-items: center;
 }
 
-.logo {
-  flex: 1;
-}
-
 .logo>a {
   text-decoration: none;
   color: var(--md-sys-color-secondary);
 }
-
-#header-container div:nth-child(3) {
-  flex: 1;
-}
-
 
 .search-container input {
   width: 15vw;
@@ -38,8 +29,6 @@
 .search-container input:focus {
   width: 30vw;
 }
-
-
 
 .search-form {
   display: flex;
