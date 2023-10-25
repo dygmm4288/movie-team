@@ -23,6 +23,7 @@ form.addEventListener('submit', (e) => {
   validateBasic(headerInput.value) !== true // input 값 유효성 검사 통과 시 searchMovie에 API URL과 input 값 전달
     ? alert('검색어를 입력하세요')
     : searchMovies(API_URL, headerInput.value)
+  headerInput.value = ''
 })
 
 

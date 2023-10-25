@@ -85,6 +85,9 @@ export function searchMovies(url, inputValue) {
   fetch(url).then(res => res.json())
     .then(data => {
       let filtered = data.results.filter(item => (item.title).toLowerCase().includes(`${inputValue}`))
+      if (filtered.length === 0) {
+        alert('일치하는 결과가 없습니다')
+      }
       showMovies(filtered);
     })
 }
