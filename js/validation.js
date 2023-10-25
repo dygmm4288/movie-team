@@ -25,4 +25,4 @@ export const validateBasic = validate(every([empty]));
 export const validatePassword = validate(
   every([empty, atLeastLengt, maximumLength]),
 );
-export const validateComment = validate((s) => every([empty, isSlang]));
+export const validateComment = validate(every([empty, isSlang]));
