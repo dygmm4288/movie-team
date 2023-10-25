@@ -38,16 +38,14 @@ function getMovies(url) {
         if (upperCaseA === upperCaseB) return 0;
       })
 
-
       // 각각의 정렬 버튼 클릭 시 함수 실행
       resetBtn.addEventListener('click', () => reset()) // 기본
       orderRateBtn.addEventListener('click', () => orderByRate(sortedByRate))
       orderAlphabetBtn.addEventListener('click', () => orderByAlphabet(sortedByAlpha))
-
     })
 }
 
-// 평점순 정렬 함수
+// 기본순 정렬 함수
 function reset() {
   fetch(API_URL)
     .then(res => res.json())
