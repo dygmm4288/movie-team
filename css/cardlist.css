@@ -6,6 +6,7 @@ body {
 main {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
 }
 
@@ -26,6 +27,7 @@ button.cardlist-btn {
 
 .movie {
   width: 300px;
+  height: 450px;
   margin: 1rem;
   padding: 20px 40px 0px 40px;
   border-radius: 5px;
