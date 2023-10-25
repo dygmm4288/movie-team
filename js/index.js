@@ -1,10 +1,15 @@
+import { CommentList } from './comment/CommentList.js';
+
+// document.body.insertAdjacentElement('afterbegin', Comment(123).render());
+document.querySelector('#detail-page').append(CommentList(123).render());
+
 const API_KEY = 'api_key=c929b1fb9912e2f89022f61946d45cac';
 const BASE_URL = 'https://api.themoviedb.org/3'
 const API_URL = BASE_URL + '/discover/movie?sort_by=popularity.desc&'
   + API_KEY;
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
-// Variables 
+// Variables
 const orderRateBtn = document.querySelector('.order-rate');
 const orderAlphabet = document.querySelector('.order-alphabet');
 
@@ -15,12 +20,12 @@ function getMovies(url) {
   fetch(url).then(res => res.json()).then(data => {
     showMovies(data.results);
 
-    // 평점순 정렬
+    // 평점순 정렬 데이터
     let sortedByRate = data.results.sort((a, b) => {
       return b.vote_average - a.vote_average
     })
 
-    // 가나다순 정렬
+    // 가나다순 정렬 데이터
     let sortedByAlpha = data.results.sort((a, b) => {
       const upperCaseA = a.title.toUpperCase();
       const upperCaseB = b.title.toUpperCase();
@@ -96,3 +101,4 @@ function showMovies(data) {
     main.appendChild(movieEl);
   });
 }
+

@@ -70,8 +70,10 @@ export function Comment(id) {
     };
     // 이벤트 할당
     $form.addEventListener('submit', handleEnrollComment);
+
     append($userInfoDiv, [$nickInput, $passwordInput, $confirmPasswordInput]);
     append($form, [$commentInput, $userInfoDiv, $submitButton]);
+
     return [
       $form,
       [
@@ -95,11 +97,3 @@ export function Comment(id) {
     <button class="comment-btn" type="submit">등록</button>
 </form>
 */
-
-
-
-
-
-
-
-

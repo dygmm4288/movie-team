@@ -5,7 +5,7 @@ export function getStorage(key) {
   if (!getStorage(key) && options?.defaultValue) {
     setStorage(key, options.defaultValue);
   } else if (!options?.defaultValue) {
-    console.error(‘set Storage 함수 잘못 사용하셨습니다.‘);
+    console.error('set Storage 함수 잘못 사용하셨습니다.');
     return null;
   }
   const prev = getStorage(key);

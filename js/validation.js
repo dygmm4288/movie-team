@@ -9,7 +9,7 @@ function empty(s) {
   return s !== '';
 }
 function atLeastLengt(s) {
-  return s.length > 8;
+  return s.length >= 8;
 }
 function maximumLength(s) {
   return s.length <= 30;
