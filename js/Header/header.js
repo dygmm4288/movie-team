@@ -26,7 +26,7 @@ window.addEventListener('keydown', (e) => {
   slash.focus();
 
   // 찾은 요소에 transition이 시작 될 때
-  slash.addEventListener('transitionstart', () => {
+  slash.addEventListener('focus', () => {
     // value를 비워준다.
     slash.value = ''
   })
