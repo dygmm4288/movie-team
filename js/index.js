@@ -1,7 +1,7 @@
-import { CommentList } from './comment/CommentList.js';
+// import { CommentList } from './comment/CommentList.js';
 
-// document.body.insertAdjacentElement('afterbegin', Comment(123).render());
-document.querySelector('#detail-page').append(CommentList(123).render());
+// // document.body.insertAdjacentElement('afterbegin', Comment(123).render());
+// document.querySelector('#detail-page').append(CommentList(123).render());
 
 const API_KEY = 'api_key=c929b1fb9912e2f89022f61946d45cac';
 const BASE_URL = 'https://api.themoviedb.org/3'
@@ -11,36 +11,52 @@ const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
 // Variables
 const orderRateBtn = document.querySelector('.order-rate');
-const orderAlphabet = document.querySelector('.order-alphabet');
+const orderAlphabetBtn = document.querySelector('.order-alphabet');
+const resetBtn = document.querySelector('.order-init');
 
 getMovies(API_URL);
 
 // 영화 가져오는 함수
 function getMovies(url) {
-  fetch(url).then(res => res.json()).then(data => {
-    showMovies(data.results);
+  fetch(url).then(res => res.json())
+    .then(data => {
+      // 초기 화면
+      showMovies(data.results)
 
-    // 평점순 정렬 데이터
-    let sortedByRate = data.results.sort((a, b) => {
-      return b.vote_average - a.vote_average
+      // 평점순 정렬 데이터
+      let sortedByRate = data.results.sort((a, b) => {
+        return b.vote_average - a.vote_average
+      })
+
+      // 가나다순 정렬 데이터
+      let sortedByAlpha = data.results.sort((a, b) => {
+        const upperCaseA = a.title.toUpperCase();
+        const upperCaseB = b.title.toUpperCase();
+
+        if (upperCaseA > upperCaseB) return 1;
+        if (upperCaseA < upperCaseB) return -1;
+        if (upperCaseA === upperCaseB) return 0;
+      })
+
+
+      // 각각의 정렬 버튼 클릭 시 함수 실행
+      resetBtn.addEventListener('click', () => reset()) // 기본
+      orderRateBtn.addEventListener('click', () => orderByRate(sortedByRate))
+      orderAlphabetBtn.addEventListener('click', () => orderByAlphabet(sortedByAlpha))
+
     })
-
-    // 가나다순 정렬 데이터
-    let sortedByAlpha = data.results.sort((a, b) => {
-      const upperCaseA = a.title.toUpperCase();
-      const upperCaseB = b.title.toUpperCase();
-
-      if (upperCaseA > upperCaseB) return 1;
-      if (upperCaseA < upperCaseB) return -1;
-      if (upperCaseA === upperCaseB) return 0;
-    })
-
-    // 각각의 정렬 버튼 클릭 시 함수 실행
-    orderRateBtn.addEventListener('click', () => orderByRate(sortedByRate))
-    orderAlphabet.addEventListener('click', () => orderByAlphabet(sortedByAlpha))
-  })
 }
 
+// 평점순 정렬 함수
+function reset() {
+  fetch(API_URL)
+    .then(res => res.json())
+    .then(data => {
+      main.innerHTML = '';  // 함수가 실행될때마다 html을 빈 문자열로 설정
+      showMovies(data.results)
+    })
+
+}
 
 // 평점순 정렬 함수
 function orderByRate(sortedByRateData) {
