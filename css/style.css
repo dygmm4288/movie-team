@@ -28,6 +28,7 @@
 
 .search-container input:focus {
   width: 30vw;
+  border: none;
 }
 
 .search-form {
@@ -45,8 +46,29 @@
   transform: rotate(-60deg);
 }
 
+/* ///////////////*/
+/* FILTER BUTTONS */
+/* ////////////// */
 
+.filter-button {
+  width: 100%;
+  padding: 1rem 3rem;
+}
 
+.filter-button button {
+  cursor: pointer;
+  padding: 0.55rem 0.8rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--md-sys-color-on-primary-container);
+  ;
+}
+
+.filter-button button:hover {
+  background-color: var(--md-sys-color-primary-container);
+  color: white;
+}
 
 /* //////////// */
 /* Comment Form */

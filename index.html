@@ -6,14 +6,12 @@
     <link rel="stylesheet" href="./css/theme/theme.css" />
     <link rel="stylesheet" href="./css/theme/theme.dark.css" />
     <link rel="stylesheet" href="./css/theme/moviedetail.css" />
-    <script src="./js/moviedetail.js" defer></script>
     <link rel="stylesheet" href="css/cardlist.css" />
     <link rel="stylesheet" href="./css/style.css" />
-    <script src="./js/Header/header.js" type="module"></script>
-    <script src="./js/index.js" type="module"></script>
     <title>영화 검색 사이트</title>
-    <script src="./js/index.js" type="module"></script>
+    <script src="./js/moviedetail.js" defer></script>
     <script src="./js/Header/header.js" type="module"></script>
+    <script src="./js/index.js" type="module"></script>
   </head>
   <body>
     <header id="header-container" class="primary-container">
@@ -30,12 +28,16 @@
           <button class="search-icon">🧭</button>
         </form>
       </div>
+      <div></div>
     </header>
+    <div class="filter-button">
+      <button class="order-rate">평점 높은 순</button>
+      <button class="order-alphabet">가나다 순</button>
+    </div>
+
     <main id="main"></main>
     <div class="movie-cover"></div>
     <div id="detail-page">
       <div id="confirm-modal"></div>
-    </div>
-    <script src="/js/index.js"></script>
   </body>
 </html>
