@@ -62,10 +62,10 @@ const image = document.querySelector(".back-card"),
 image.addEventListener("click", (e) => {
   console.log(e);
 
-  let xValue = e.clientX - e.target.offsetParent.offsetParent.offsetLeft;
-  let yValue = e.clientY - e.target.offsetParent.offsetParent.offsetTop;
-  heartIcon.style.left = `${xValue}px`
-  heartIcon.style.top = `${yValue}px`
+  // let xValue = e.clientX - e.target.offsetParent.offsetParent.offsetLeft;
+  // let yValue = e.clientY - e.target.offsetParent.offsetParent.offsetTop;
+  // heartIcon.style.left = `${xValue}px`
+  // heartIcon.style.top = `${yValue}px`
   heartIcon.classList.add("active");
 
   setTimeout(() => {
