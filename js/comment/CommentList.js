@@ -118,8 +118,8 @@ function CommentListItem(
     }
 
     const handleUpdate = (e) => {
-      const modalForm = document.querySelector('#confirm-modal')
-      modalForm.style.display = 'block';
+      /* const modalForm = document.querySelector('#confirm-modal')
+      modalForm.style.display = 'block'; */
 
       const isCanUpdate = $commentItem.querySelector('p');
       const prevValue = $comment.innerText;
@@ -192,9 +192,9 @@ function CommentConfirmForm(controlFunction, handlerCancleButton, password) {
     $submitButton.innerText = '확인';
     $cancleButton.innerText = '취소';
 
-    $cancleButton.addEventListener('click', () => {
+    /* $cancleButton.addEventListener('click', () => {
       modalForm.style.display = 'none';
-    })
+    }) */
 
     // [todo] : 주어진 비밀번호와 제출된 비밀번호가 일치하는 지 확인을 해야 한다.
     // 일치한다면 어딘가에 true를 전해야하는데 그것을 어디에 전해야할지를 확인을 해야한다.
