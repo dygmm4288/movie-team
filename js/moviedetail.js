@@ -1,17 +1,17 @@
 let movieEx = [
   {
     adult: false,
-    backdrop_path: "/tmU7GeKVybMWFButWEGl2M4GeiP.jpg",
+    backdrop_path: '/tmU7GeKVybMWFButWEGl2M4GeiP.jpg',
     genre_ids: [18, 80],
     id: 238,
-    original_language: "en",
-    original_title: "The Godfather",
+    original_language: 'en',
+    original_title: 'The Godfather',
     overview:
-      "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.",
+      'Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.',
     popularity: 110.264,
-    poster_path: "/3bhkrj58Vtu7enYsRolD1fZdja1.jpg",
-    release_date: "1972-03-14",
-    title: "The Godfather",
+    poster_path: '/3bhkrj58Vtu7enYsRolD1fZdja1.jpg',
+    release_date: '1972-03-14',
+    title: 'The Godfather',
     video: false,
     vote_average: 8.7,
     vote_count: 18811,
@@ -19,10 +19,9 @@ let movieEx = [
 ];
 
 movieEx.forEach((a) => {
-  document.querySelector(".movie-cover").insertAdjacentHTML(
-    "beforeend",
-    `<div class="movie-cover">
-<div class="movie-card">
+  document.querySelector('.movie-cover').insertAdjacentHTML(
+    'beforeend',
+    `<div class="movie-card">
   <div class="movie-img-box">
     <div class="movie-img">
       <img
@@ -51,24 +50,23 @@ movieEx.forEach((a) => {
 <div class="movie-summary">
   <div class="headline-medium tertiary-container-text">줄거리</div>
   <p class="body-large secondary-container-text">${a.overview}</p>
-</div>
-</div>`
+</div>`,
   );
 });
 
-const image = document.querySelector(".back-card"),
-  heartIcon = document.querySelector(".heart");
+const image = document.querySelector('.back-card'),
+  heartIcon = document.querySelector('.heart');
 
-image.addEventListener("click", (e) => {
+image.addEventListener('click', (e) => {
   console.log(e);
 
   // let xValue = e.clientX - e.target.offsetParent.offsetParent.offsetLeft;
   // let yValue = e.clientY - e.target.offsetParent.offsetParent.offsetTop;
   // heartIcon.style.left = `${xValue}px`
   // heartIcon.style.top = `${yValue}px`
-  heartIcon.classList.add("active");
+  heartIcon.classList.add('active');
 
   setTimeout(() => {
-    heartIcon.classList.remove("active");
+    heartIcon.classList.remove('active');
   }, 1000);
 });
