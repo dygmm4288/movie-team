@@ -36,12 +36,10 @@ button.cardlist-btn {
   background-color: var(--md-sys-color-on-surface-dark);
 }
 
-
 .movie img {
   width: 100%;
   border-radius: 5px;
 }
-
 
 .cardlist-movie-info {
   display: flex;
@@ -51,15 +49,13 @@ button.cardlist-btn {
   letter-spacing: 0.5px;
 }
 
-
 .cardlist-movie-info h3 {
   margin-top: 0px;
 }
 
 .cardlist-movie-info {
-  padding: 0.25rem 0.5rem
+  padding: 0.25rem 0.5rem;
 }
-
 
 .cardlist-overview {
   position: absolute;
