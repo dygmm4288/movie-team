@@ -37,7 +37,7 @@ function getMovies(url) {
         if (upperCaseA < upperCaseB) return -1;
         if (upperCaseA === upperCaseB) return 0;
       })
-    
+
       // 각각의 정렬 버튼 클릭 시 함수 실행
       resetBtn.addEventListener('click', () => showMovies(data.results)) // 기본
       orderRateBtn.addEventListener('click', () => showMovies(sortedByRate))
@@ -84,11 +84,14 @@ export function searchMovies(url, inputValue) {
   main.innerHTML = '';  // 함수가 실행될때마다 html을 빈 문자열로 설정
   fetch(url).then(res => res.json())
     .then(data => {
-      let filtered = data.results.filter(item => (item.title).toLowerCase().includes(`${inputValue}`))
+      let filtered = [...data.results].filter(item => (item.title).toLowerCase().includes(`${inputValue}`))
       if (filtered.length === 0) {
+        showMovies([...data.results]);
         alert('일치하는 결과가 없습니다')
       }
-      showMovies(filtered);
+      else {
+        showMovies(filtered);
+      }
     })
 }
 
