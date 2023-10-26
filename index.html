@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="css/cardlist.css" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="css/comment.css" />
+    <link rel="stylesheet" href="./css/slider.css" />
     <title>영화 검색 사이트</title>
-    <script src="./js/moviedetail.js" defer></script>
     <script src="./js/Header/header.js" type="module"></script>
     <script src="./js/index.js" type="module"></script>
+    <script src="./js/slider/slider.js" defer type="module"></script>
   </head>
   <body>
     <header id="header-container" class="primary-container">
       <div class="logo">
-        <a href="/"><h1>로고</h1></a>
+        <h1><a href="/" data-link="/">로고</a></h1>
       </div>
       <div class="search-container">
         <form class="search-form">
@@ -40,6 +41,15 @@
     <main id="main"></main>
     <div id="detail-page">
       <div class="movie-cover"></div>
+
+      <div class="slider-wrapper">
+        <div class="movie-slider-container">
+          <div class="movie-slider-wrapper"></div>
+          <button class="prev-button">⬅️</button>
+          <button class="next-button">➡️</button>
+        </div>
+      </div>
+
       <form class="comment-form-container">
         <input type="text" class="primary-input" id="comment" />
         <div class="user-info-container">
@@ -52,9 +62,7 @@
       <ul class="comment-list-wrapper">
         <li class="comment-list-item">
           <p class="comment-desc">{comment}</p>
-          <!-- <textarea class="comment-desc">
-{comment}</textarea
-          > -->
+          <!-- <textarea class="comment-desc">{comment}</textarea> -->
           <div class="control-wrapper">
             <button class="comment-update-btn">수정</button>
             <button class="comment-remove-btn">삭제</button>
@@ -66,9 +74,9 @@
       <form class="confirm-modal-form">
         <input class="confirm-modal-input" id="confirm-modal-input" />
         <div class="confirm-button-box">
-        <button class="confirm-button">확인</button>
-        <button class="confirm-button">취소</button>
-      </div>
+          <button class="confirm-button">확인</button>
+          <button class="confirm-button">취소</button>
+        </div>
       </form>
     </div>
   </body>

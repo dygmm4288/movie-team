@@ -84,7 +84,7 @@
 }
 
 .heart.active {
-  animation: animate 0.8s linear forwards;
+  animation: animate 0.8s linear;
 }
 
 @keyframes animate {
@@ -111,6 +111,10 @@
   90% {
     opacity: 1;
     font-size: 60px;
+  }
+
+  100% {
+    opacity: 0;
   }
 }
 
