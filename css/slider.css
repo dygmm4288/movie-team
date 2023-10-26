@@ -1,5 +1,5 @@
 .slider-wrapper {
-  padding: 0 4rem;
+  padding: 10px 150px 10px 150px;
 }
 
 .movie-slider-container {
@@ -8,6 +8,8 @@
   border: 1px solid black;
   overflow: hidden;
   position: relative;
+  border-radius: 15px;
+  border-color: white;
 }
 
 .movie-slider-wrapper {

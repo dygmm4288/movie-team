@@ -1,8 +1,8 @@
 .movie-cover {
-  width: 700px;
+  width: 100%;
   border-radius: 15px;
-  padding: 1rem;
-  margin: 10px auto 10px auto;
+  padding: 10px 150px 10px 150px;
+  justify-content: center;
 }
 
 .movie-card {
@@ -13,14 +13,15 @@
   flex-wrap: nowrap;
   gap: 20px;
   padding: 2rem;
-  border-color: white;
-  box-shadow: 4px 8px 16px 0 rgb(75, 127, 173);
 }
 
 .movie-img-box {
   width: 200px;
   height: 300px;
   perspective: 1000px;
+  flex-basis: 200px;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 
 .movie-img-box:hover .movie-img {
@@ -46,11 +47,22 @@
 }
 
 .back-card {
+  background-color: #f7fcff;
   text-align: center;
   border-radius: 15px;
   border-color: white;
   box-shadow: 4px 8px 16px 0 rgb(75, 127, 173);
   transform: rotateY(180deg);
+  position: relative;
+}
+
+.fixed-heart {
+  font-size: 30px;
+  color: red;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .front-card,
@@ -62,7 +74,6 @@
 }
 
 .movie-img .heart {
-
   position: absolute;
   font-size: 40px;
   color: red;
@@ -108,21 +119,21 @@
 }
 
 .movie-body1 {
+  width: 150px;
   height: 250px;
-  width: 120px;
   padding: 1rem;
-  align-items: center;
-  flex-direction: row;
-  vertical-align: middle;
+  flex-basis: 150px;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 
 .movie-body2 {
+  width: 100%;
   height: 250px;
-  width: 210px;
   padding: 1rem;
-  align-items: center;
-  flex-direction: row;
-  vertical-align: middle;
+  flex-basis: 500px;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 
 .text-gap {
@@ -131,9 +142,11 @@
 
 .movie-summary {
   border-radius: 15px;
-  margin-top: 20px;
+  margin-top: 10px;
   align-items: center;
-  border-color: white;
-  box-shadow: 4px 8px 16px 0 rgb(75, 127, 173);
-  padding: 1rem;
+  padding: 2rem;
+  flex-direction: column;
+  flex-basis: 600px;
+  flex-grow: 0.5;
+  flex-shrink: 0;
 }

@@ -49,21 +49,22 @@ export function CommentList(id) {
     const render = (commentLists) => {
       commentItems.forEach((commentItem) => commentItem.remove());
       $listWrapper.innerHTML = '';
-      commentItems = commentLists.map(({ comment, id, password, nickname }) => {
-        const item = CommentListItem(
-          id,
-          comment,
-          nickname,
-          password,
-          updateComment,
-          removeComment,
-        );
-        $listWrapper.appendChild(item.render());
-        return item;
-      });
+      commentItems = commentLists?.map(
+        ({ comment, id, password, nickname }) => {
+          const item = CommentListItem(
+            id,
+            comment,
+            nickname,
+            password,
+            updateComment,
+            removeComment,
+          );
+          $listWrapper.appendChild(item.render());
+          return item;
+        },
+      );
     };
     render(commentLists);
-    console.log($listWrapper);
     return [$listWrapper];
   });
 }

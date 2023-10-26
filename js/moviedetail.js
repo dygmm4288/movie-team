@@ -9,7 +9,8 @@ export function movieDetail(movie) {
         src="${`https://image.tmdb.org/t/p/w200` + movie.poster_path}"
         class="display-medium on-primary front-card"
         art="..." />
-      <div class="tertiary back-card">
+      <div class="back-card">
+      <div class="fixed-heart">♥</div>
         <div class="heart">♥</div>
         </div>
       

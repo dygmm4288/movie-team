@@ -4,7 +4,6 @@ import { routing } from './router.js';
 
 const main = document.querySelector('#main');
 const detailPage = document.querySelector('#detail-page');
-console.log(main, detailPage);
 export function renderHome() {
   detailPage.style.display = 'none';
   main.style.display = '';
@@ -19,7 +18,17 @@ export function renderMovieDetail(movie) {
 export function handleLocation(link) {
   return (e) => {
     e.preventDefault();
-    history.pushState(null, null, window.location.href + link);
+    console.log(link);
+    history.pushState(link, null, window.location.href + link);
     routing(router);
   };
 }
+window.addEventListener('popstate', (e) => {
+  console.log(e, e.state);
+  switch (e.state) {
+    case '/':
+      break;
+    default:
+      break;
+  }
+});
