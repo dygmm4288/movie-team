@@ -32,13 +32,10 @@ function getMovies(url) {
       });
 
       // 가나다순 정렬 데이터
-      let sortedByAlpha = [...data.results].sort((a, b) => {
+      let sortedByAlpha = data.results.slice(0).sort((a, b) => {
         const upperCaseA = a.title.toUpperCase();
         const upperCaseB = b.title.toUpperCase();
-
-        if (upperCaseA > upperCaseB) return 1;
-        if (upperCaseA < upperCaseB) return -1;
-        if (upperCaseA === upperCaseB) return 0;
+        return upperCaseA > upperCaseB ? 1 : upperCaseA < upperCaseB ? -1 : 0;
       });
 
       // 각각의 정렬 버튼 클릭 시 함수 실행
@@ -56,9 +53,14 @@ export function searchMovies(url, inputValue) {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      let filtered = [...data.results].filter((item) =>
-        item.title.toLowerCase().includes(`${inputValue}`),
-      );
+      const filtered = [];
+      for (let i = 0; i < data.results.length; i++) {
+        const item = data.results[i];
+        if (!item.title.toLowerCase().includes(`${inputValue}`)) {
+          continue;
+        }
+        filtered.push(item);
+      }
 
       if (filtered.length === 0) {
         showMovies([...data.results]);
@@ -71,8 +73,9 @@ export function searchMovies(url, inputValue) {
 
 function showMovies(data) {
   main.innerHTML = '';
-
-  data.forEach((movie) => {
+  let i = 0;
+  while (i < data.length) {
+    const movie = data[i++];
     const { title, poster_path, vote_average, overview, id } = movie;
     const movieEl = document.createElement('div');
     movieEl.classList.add('movie');
@@ -93,7 +96,7 @@ function showMovies(data) {
     `;
 
     main.appendChild(movieEl);
-  });
+  }
 }
 
 // 디테일 페이지
