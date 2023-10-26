@@ -17,17 +17,20 @@ export function showDetail(backDrops) {
   const prevBtn = create('button', 'prev-button');
   const nextBtn = create('button', 'next-button');
   const slideContainer = create('div', 'movie-slider-wrapper');
+  const movieSliderContainer = create('div', 'movie-slider-container');
 
-  append(sliderWrapper, slideContainer);
-  append(slideContainer, [prevBtn, nextBtn]);
+  prevBtn.innerText = '⬅️';
+  nextBtn.innerText = '➡️';
+
+  append(sliderWrapper, movieSliderContainer);
+  append(movieSliderContainer, [slideContainer, prevBtn, nextBtn]);
 
   let initPosition = 0;
   let itemLength = 0;
 
   backDrops.forEach((el) => {
-    const slideItem = document.createElement('div'); // Element
-
-    console.log('slide container is : ', slideContainer);
+    const slideItem = create('div', 'movie-slide-item');
+    // console.log('slide container is : ', slideContainer);
     slideContainer.append(slideItem);
     slideItem.innerHTML = `
           <img src="https://image.tmdb.org/t/p/w1280/${el.file_path}"/>`;
