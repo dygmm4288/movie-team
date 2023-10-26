@@ -131,7 +131,7 @@ body {
 }
 
 
-/* COMMENT LIST */
+/* COMMENT LIST  */
 .comment-list-wrapper {
   height: 250px;
   overflow: scroll;
@@ -150,7 +150,6 @@ body {
 .control-wrapper button {
   margin-right: 0.5rem;
 }
-
 
 /* ///////////// */
 /* CONFIRM MODAL */
@@ -192,5 +191,4 @@ body {
   cursor: pointer;
   margin-block: 1rem;
   margin-right: 12px;
-
 }

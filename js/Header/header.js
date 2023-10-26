@@ -13,8 +13,12 @@ const API_URL = BASE_URL + '/discover/movie?sort_by=popularity.desc&' + API_KEY;
 
 // variables
 const form = document.querySelector('.search-form');
+const allInput = document.querySelectorAll('input');
+console.log(allInput);
 const headerInput = document.querySelector('.search-input');
 let inputTemp = ''; // input의 값을 임시로 저장 할 변수
+
+
 
 // 검색 시 일어날 일들 (input 데이터 검사 / fetch)
 form.addEventListener('submit', (e) => {
@@ -25,6 +29,7 @@ form.addEventListener('submit', (e) => {
   headerInput.value = '';
 });
 
+
 // 브라우저 창에서 keydown 이벤트가 발생 시
 window.addEventListener('keydown', (e) => {
   // dataset 속성의 값이 지금 누른 키와 같은 요소를 찾고
@@ -32,6 +37,9 @@ window.addEventListener('keydown', (e) => {
 
   // 요소가 없다면 아무 일도 일어나지 않음
   if (!slash) return;
+
+  // 창 내에 어딘가 focus가 되어있고 그 요소의 anchorOffset이 3 미만이라면 아무일도 일어나지 않음
+  if (window.getSelection().anchorOffset < 3) return;
 
   // 요소가 있다면 그 요소에 focus 하고
   slash.focus();
