@@ -4,7 +4,11 @@
 
 .control-wrapper {
   padding: 1rem 9rem;
-  float: right;
+  display : flex;
+  justify-content: flex-end; 
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
 }
 
 .confirm-modal-form {
@@ -25,7 +29,7 @@
   background-color: var(--md-sys-color-primary-container);
   border-radius: 5px;
   border: none;
-  margin: auto;
+  margin: 0;
   transition: all 0.3s ease;
   font-weight: 700;
 }
