@@ -2,6 +2,8 @@
 
 import { handleLocation, renderHome, renderMovieDetail } from './page.js';
 import { routing } from './router.js';
+import { showDetail } from './slider/slider.js';
+import { append } from './util.js';
 
 // // document.body.insertAdjacentElement('afterbegin', Comment(123).render());
 //document.querySelector('#detail-page').append(CommentList(123).render());
@@ -57,13 +59,16 @@ export function searchMovies(url, inputValue) {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      let filtered = data.results.filter((item) =>
+      let filtered = [...data.results].filter((item) =>
         item.title.toLowerCase().includes(`${inputValue}`),
       );
+
       if (filtered.length === 0) {
+        showMovies([...data.results]);
         alert('일치하는 결과가 없습니다');
+      } else {
+        showMovies(filtered);
       }
-      showMovies(filtered);
     });
 }
 
@@ -96,6 +101,8 @@ function showMovies(data) {
   });
 }
 
+// 디테일 페이지
+
 renderHome();
 export const router = [
   {
@@ -115,8 +122,15 @@ export const router = [
       const movie = await fetch(
         BASE_URL + `/movie/${movieId}?language=en-US&` + API_KEY,
       ).then((response) => response.json());
-      console.log(movieId, movie);
-      renderMovieDetail(movie);
+      const images = await fetch(
+        BASE_URL + `/movie/${movieId}/images?` + API_KEY,
+      ).then((response) => response.json());
+
+      //console.log(movieId, movie);
+      // console.log('movie detail is : ', renderMovieDetail(movie));
+      // console.log('slide is : ', showDetail(images.backdrops));
+      append(renderMovieDetail(movie), showDetail(images.backdrops));
+      //showDetail(images.backdrops);
     },
   },
 ];

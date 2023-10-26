@@ -38,6 +38,7 @@ export function movieDetail(movie) {
 
   const $image = document.querySelector('.back-card'),
     $heartIcon = document.querySelector('.heart');
+
   $image.addEventListener('click', (e) => {
     $heartIcon.classList.add('active');
 
@@ -46,4 +47,5 @@ export function movieDetail(movie) {
       clearTimeout(timeout);
     }, 1000);
   });
+  return $movieDetail;
 }
