@@ -117,9 +117,9 @@ function CommentListItem(
       append($modalWrapper, $modalForm.render());
     }
 
-    const handleUpdate = () => {
-      // update를 하기 위해서는
-      // 업데이트하고자 하는 텍스트로 변경이 되어야 한다.
+    const handleUpdate = (e) => {
+      /* const modalForm = document.querySelector('#confirm-modal')
+      modalForm.style.display = 'block'; */
 
       const isCanUpdate = $commentItem.querySelector('p');
       const prevValue = $comment.innerText;
@@ -192,6 +192,10 @@ function CommentConfirmForm(controlFunction, handlerCancleButton, password) {
     $submitButton.innerText = '확인';
     $cancleButton.innerText = '취소';
 
+    /* $cancleButton.addEventListener('click', () => {
+      modalForm.style.display = 'none';
+    }) */
+
     // [todo] : 주어진 비밀번호와 제출된 비밀번호가 일치하는 지 확인을 해야 한다.
     // 일치한다면 어딘가에 true를 전해야하는데 그것을 어디에 전해야할지를 확인을 해야한다.
     // 그걸 어떻게 할 수 잇을까... 전역은 좀 힘들것 같은데 차라리 store의 리덕스의 형태를 직접 구현을 할가?
@@ -241,3 +245,5 @@ function CommentConfirmForm(controlFunction, handlerCancleButton, password) {
     </li>
 </ul>
  */
+
+

@@ -4,8 +4,8 @@
 
 .control-wrapper {
   padding: 1rem 9rem;
-  display : flex;
-  justify-content: flex-end; 
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
   flex-direction: row;
   gap: 10px;

@@ -4,6 +4,18 @@
   box-sizing: border-box;
 }
 
+body {
+  position: relative;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
 #header-container {
   width: 100%;
   padding: 1rem 3rem;
@@ -116,4 +128,69 @@
 .comment-form-container button:hover {
   color: var(--md-sys-color-on-primary);
   background-color: var(--md-sys-color-on-primary-container);
+}
+
+
+/* COMMENT LIST */
+.comment-list-wrapper {
+  height: 250px;
+  overflow: scroll;
+  padding: 1rem 1.25rem;
+  list-style: none;
+}
+
+.comment-list-item {
+  margin-block: 1rem;
+}
+
+.control-wrapper {
+  margin-top: 0.3rem;
+}
+
+.control-wrapper button {
+  margin-right: 0.5rem;
+}
+
+
+/* ///////////// */
+/* CONFIRM MODAL */
+/* ///////////// */
+
+#confirm-modal {
+  position: absolute;
+  bottom: 21%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  padding: 2rem 3rem 1rem 3rem;
+  border-radius: 9px;
+  background-color: aliceblue;
+  box-shadow: 3px 1px 12px 0px;
+}
+
+.confirm-modal-form h4 {
+  margin-bottom: 0.36rem;
+}
+
+.confirm-modal-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  flex-direction: row;
+  padding: 0.35rem 1rem 0.35rem 0.3rem;
+  position: relative;
+}
+
+.confirm-modal-form button {
+  color: white;
+  background-color: var(--md-sys-color-primary-container);
+  border-radius: 5px;
+  padding: 0.3rem 0.6rem 0.36rem;
+  border: none;
+  cursor: pointer;
+  margin-block: 1rem;
+  margin-right: 12px;
+
 }
