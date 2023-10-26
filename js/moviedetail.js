@@ -22,7 +22,7 @@ movieEx.forEach((a) => {
   document.querySelector('.movie-cover').insertAdjacentHTML(
     'beforeend',
     `<div class="movie-card">
-  <div class="movie-img-box">
+      <div class="movie-img-box">
     <div class="movie-img">
       <img
         src="${`https://image.tmdb.org/t/p/w200` + a.poster_path}"
