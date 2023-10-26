@@ -65,7 +65,6 @@ export function CommentList(id) {
       );
     };
     render(commentLists);
-    console.log($listWrapper);
     return [$listWrapper];
   });
 }
