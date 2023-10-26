@@ -131,10 +131,21 @@ document.querySelectorAll('a').forEach((elem) =>
   elem.addEventListener('click', (e) => {
     if (e.target.matches('[data-link]')) {
       e.preventDefault();
-      history.pushState(null, null, e.target.href);
+      history.pushState(e.target.href, null, e.target.href);
       routing(router);
     }
   }),
 );
+window.addEventListener('popstate', (e) => {
+  console.log(e, e.state);
+  switch (e.state) {
+    case '/':
+      renderHome();
+      break;
+    default:
+      routing(router);
+      break;
+  }
+});
 
 console.log(window.location);
