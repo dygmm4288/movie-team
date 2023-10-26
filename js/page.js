@@ -23,12 +23,3 @@ export function handleLocation(link) {
     routing(router);
   };
 }
-window.addEventListener('popstate', (e) => {
-  console.log(e, e.state);
-  switch (e.state) {
-    case '/':
-      break;
-    default:
-      break;
-  }
-});

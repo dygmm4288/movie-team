@@ -118,8 +118,8 @@ function CommentListItem(
     }
 
     const handleUpdate = (e) => {
-      /* const modalForm = document.querySelector('#confirm-modal')
-      modalForm.style.display = 'block'; */
+      const modalForm = document.querySelector('#confirm-modal');
+      modalForm.style.display = 'block';
 
       const isCanUpdate = $commentItem.querySelector('p');
       const prevValue = $comment.innerText;
@@ -146,9 +146,12 @@ function CommentListItem(
         return;
       }
       // 내용의 변화가 있다면
+      modalForm.style.display = 'none';
       updateComment(id, nextValue);
     };
     const handleRemove = () => {
+      const modalForm = document.querySelector('#confirm-modal');
+      modalForm.style.display = 'block';
       enrollModalForm(() => {
         // 여기서는 만약 비밀번호가 일치한다면
         removeComment(id, password);
@@ -157,9 +160,12 @@ function CommentListItem(
     };
     const handlerCancleButton = () => {
       $modalWrapper.innerHTML = '';
+      const modalForm = document.querySelector('#confirm-modal');
+      modalForm.style.display = 'none';
     };
 
     $updateBtn.addEventListener('click', handleUpdate);
+
     $removeBtn.addEventListener('click', handleRemove);
     append($controlWrapper, [$updateBtn, $removeBtn]);
     append($commentItem, [$comment, $controlWrapper]);
@@ -185,22 +191,16 @@ function CommentConfirmForm(controlFunction, handlerCancleButton, password) {
         placeholder: '비밀번호를 입력해 주세요',
       },
     );
+    const $heading = create('h4');
     const $submitButton = create('button', 'confirm-button', '', {
       type: 'submit',
     });
     const $cancleButton = create('button', 'cancle-button', '');
+
+    $heading.innerText = '게시물 비밀번호';
     $submitButton.innerText = '확인';
     $cancleButton.innerText = '취소';
 
-    /* $cancleButton.addEventListener('click', () => {
-      modalForm.style.display = 'none';
-    }) */
-
-    // [todo] : 주어진 비밀번호와 제출된 비밀번호가 일치하는 지 확인을 해야 한다.
-    // 일치한다면 어딘가에 true를 전해야하는데 그것을 어디에 전해야할지를 확인을 해야한다.
-    // 그걸 어떻게 할 수 잇을까... 전역은 좀 힘들것 같은데 차라리 store의 리덕스의 형태를 직접 구현을 할가?
-    // 확실히 왜 리덕스가 필요한지를 느끼겠네 리덕스를 이용한 구현이 필요할 것 같으니까 나중에 리팩토링 할때 해당 부분을 추가해보자
-    // 그리고 지금은 그냥 데이터를 어떻게 넘길 수 잇을지를 생각해본다면
     const handlerConfirmButton = function (e) {
       e.preventDefault();
       const value = $input.value;
@@ -208,27 +208,21 @@ function CommentConfirmForm(controlFunction, handlerCancleButton, password) {
       if (value !== password) {
         console.error('비밀번호가 일치하지 않습니다.');
         alert('비밀번호가 일치하지 않습니다.');
-        $input.value = ''; // 비밀번호가 틀릴 경우에 새롭게 입력할 수 있도록 내부 value값을 지워준다.
-        $input.focus(); // 내부 value값을 지운 다음에 focus를해서 바로 입력할 수 있도록 해준다.
+        $input.value = '';
+        $input.focus();
         return;
       }
-      // 비밀번호가 일치한다면 무엇을 해야하는가
-      // 1. targetElement가 수정 혹은 삭제를 했을 경우에 해당 기능을 수행할 수 잇도록 해야한다.
-      // 2. 수정의경우 수정을 할 수 있게끔 하고
-      // 3. 삭제의 경우 삭제 기능을 수행할 수 잇게끔 해야한다.
-      // 4. 둘 다 프린팅을 할 때 어떻게 프린팅을 할 것인가가 중요한데
-      // 5. 수정의 경우 수정완료 버튼을 눌러야 하는데
-      // 6. 수정을 하기 위해서는 어떻게 해야 수정이 가능할까?
-      // 7. 각각의 이벤트들은 수정을 위해서 상위 컴포넌트로 부터 내려와야 한다.
-      // 8. 뭐가 올지는 모르겠고 상위 컴포넌트로부터 위임한다.
+
       controlFunction();
-      // 뭐가 됐든 이제 해당 컴포넌트는 사라져야 하니까.
+
+      const modalForm = document.querySelector('#confirm-modal');
+      modalForm.style.display = 'none';
       $form.removeEventListener('submit', handlerConfirmButton);
     };
     $form.addEventListener('submit', handlerConfirmButton);
     $cancleButton.addEventListener('click', handlerCancleButton);
 
-    append($form, [$input, $submitButton, $cancleButton]);
+    append($form, [$heading, $input, $submitButton, $cancleButton]);
     return [$form];
   });
 }
@@ -245,5 +239,3 @@ function CommentConfirmForm(controlFunction, handlerCancleButton, password) {
     </li>
 </ul>
  */
-
-

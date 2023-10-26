@@ -11,6 +11,7 @@ export function movieDetail(movie) {
         art="..." />
       <div class="tertiary back-card">
         <div class="heart">♥</div>
+        <div class="fixed-heart">♥</div>
         </div>
       
     </div>
