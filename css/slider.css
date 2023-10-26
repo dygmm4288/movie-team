@@ -1,13 +1,15 @@
 .slider-wrapper {
-  padding: 0 5rem;
+  padding: 10px 150px 10px 150px;
 }
 
 .movie-slider-container {
   width: 100%;
-  height: 800px;
+  height: 600px;
   border: 1px solid black;
   overflow: hidden;
   position: relative;
+  border-radius: 15px;
+  border-color: white;
 }
 
 .movie-slider-wrapper {
@@ -31,8 +33,7 @@
 }
 
 .movie-slide-item {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
 }
 
 .movie-slider-container button {
