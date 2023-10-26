@@ -4,7 +4,6 @@ import { routing } from './router.js';
 
 const main = document.querySelector('#main');
 const detailPage = document.querySelector('#detail-page');
-console.log(main, detailPage);
 export function renderHome() {
   detailPage.style.display = 'none';
   main.style.display = '';

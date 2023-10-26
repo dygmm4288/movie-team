@@ -1,12 +1,9 @@
-// import { CommentList } from './comment/CommentList.js';
-
+import { Comment } from './comment/Comment.js';
+import { CommentList } from './comment/CommentList.js';
 import { handleLocation, renderHome, renderMovieDetail } from './page.js';
 import { routing } from './router.js';
 import { showDetail } from './slider/slider.js';
 import { append } from './util.js';
-
-// // document.body.insertAdjacentElement('afterbegin', Comment(123).render());
-//document.querySelector('#detail-page').append(CommentList(123).render());
 
 export const API_KEY = 'api_key=c929b1fb9912e2f89022f61946d45cac';
 export const BASE_URL = 'https://api.themoviedb.org/3';
@@ -72,9 +69,8 @@ export function searchMovies(url, inputValue) {
     });
 }
 
-//영화 보여주는 함수
 function showMovies(data) {
-  main.innerHTML = ''; // 함수가 실행될때마다 html을 빈 문자열로 설정
+  main.innerHTML = '';
 
   data.forEach((movie) => {
     const { title, poster_path, vote_average, overview, id } = movie;
@@ -82,7 +78,6 @@ function showMovies(data) {
     movieEl.classList.add('movie');
     movieEl.addEventListener('click', handleLocation(`detail?movieId=${id}`));
 
-    // 평점 기준 정렬을 위해 추가
     movieEl.dataset.vote_score = vote_average;
     movieEl.innerHTML = `
     <button class="cardlist-btn" type="button">
@@ -108,16 +103,12 @@ export const router = [
   {
     path: '/',
     render: () => {
-      // 홈 페이지 일 경우에 보여줘야하는 것을 보여준다.
-      // console.log(window.href, window.location);
       renderHome();
     },
   },
   {
     path: '/detail',
     render: async () => {
-      // detail 페이지를 랜더링 한다.
-
       const movieId = new URLSearchParams(location.search).get('movieId');
       const movie = await fetch(
         BASE_URL + `/movie/${movieId}?language=en-US&` + API_KEY,
@@ -125,12 +116,14 @@ export const router = [
       const images = await fetch(
         BASE_URL + `/movie/${movieId}/images?` + API_KEY,
       ).then((response) => response.json());
+      const commentList = new CommentList(movieId).render();
+      const commentForm = new Comment(movieId).render();
 
-      //console.log(movieId, movie);
-      // console.log('movie detail is : ', renderMovieDetail(movie));
-      // console.log('slide is : ', showDetail(images.backdrops));
-      append(renderMovieDetail(movie), showDetail(images.backdrops));
-      //showDetail(images.backdrops);
+      append(renderMovieDetail(movie), [
+        showDetail(images.backdrops),
+        commentForm,
+        commentList,
+      ]);
     },
   },
 ];
@@ -143,3 +136,5 @@ document.querySelectorAll('a').forEach((elem) =>
     }
   }),
 );
+
+console.log(window.location);
