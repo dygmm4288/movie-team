@@ -35,7 +35,7 @@ export function showDetail(backDrops) {
     slideItem.innerHTML = `
           <img src="https://image.tmdb.org/t/p/w1280/${el.file_path}"/>`;
 
-    slideContainer.style.width = `${backDrops.length * 100}vw`; // 300vw
+    slideContainer.style.width = `${backDrops.length * 100}%`; // 300vw
     slideItem.style.width = `${(backDrops.length * 100) / backDrops.length}vw`; // 100vw
   });
 

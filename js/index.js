@@ -1,12 +1,12 @@
-// import { CommentList } from './comment/CommentList.js';
+import { CommentList } from './comment/CommentList.js';
 
 import { handleLocation, renderHome, renderMovieDetail } from './page.js';
 import { routing } from './router.js';
 import { showDetail } from './slider/slider.js';
 import { append } from './util.js';
 
-// // document.body.insertAdjacentElement('afterbegin', Comment(123).render());
-//document.querySelector('#detail-page').append(CommentList(123).render());
+document.body.insertAdjacentElement('afterbegin', Comment(123).render());
+document.querySelector('#detail-page').append(CommentList(123).render());
 
 export const API_KEY = 'api_key=c929b1fb9912e2f89022f61946d45cac';
 export const BASE_URL = 'https://api.themoviedb.org/3';
