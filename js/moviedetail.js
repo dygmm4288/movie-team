@@ -28,7 +28,8 @@ movieEx.forEach((a) => {
         src="${`https://image.tmdb.org/t/p/w200` + a.poster_path}"
         class="display-medium on-primary front-card"
         art="..." />
-      <div class="tertiary back-card">
+      <div class="back-card">
+      <div class="fixed-heart">♥</div>
         <div class="heart">♥</div>
         </div>
       
@@ -48,7 +49,7 @@ movieEx.forEach((a) => {
   </div>
 </div>
 <div class="movie-summary">
-  <div class="headline-medium tertiary-container-text">줄거리</div>
+  <div class="headline-medium tertiary-container-text text-gap">줄거리</div>
   <p class="body-large secondary-container-text">${a.overview}</p>
 </div>`,
   );
