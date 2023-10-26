@@ -129,7 +129,9 @@ body {
   background-color: var(--md-sys-color-on-primary-container);
 }
 
+
 /* COMMENT LIST */
+
 .comment-list-wrapper {
   width: 80%;
   height: 250px;
@@ -190,4 +192,6 @@ body {
   cursor: pointer;
   margin-block: 1rem;
   margin-right: 12px;
+
 }
+

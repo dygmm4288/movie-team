@@ -42,7 +42,7 @@ function getMovies(url) {
       resetBtn.addEventListener('click', () => showMovies(data.results)); // 기본
       orderRateBtn.addEventListener('click', () => showMovies(sortedByRate));
       orderAlphabetBtn.addEventListener('click', () =>
-        showMovies(sortedByAlpha),
+        showMovies(sortedByAlpha)
       );
     });
 }
