@@ -2,6 +2,8 @@
 
 import { handleLocation, renderHome, renderMovieDetail } from './page.js';
 import { routing } from './router.js';
+import { showDetail } from './slider/slider.js';
+import { append } from './util.js';
 
 // // document.body.insertAdjacentElement('afterbegin', Comment(123).render());
 //document.querySelector('#detail-page').append(CommentList(123).render());
@@ -53,19 +55,21 @@ function getMovies(url) {
 
 // 영화 검색하는 함수
 export function searchMovies(url, inputValue) {
-  main.innerHTML = '';  // 함수가 실행될때마다 html을 빈 문자열로 설정
-  fetch(url).then(res => res.json())
-    .then(data => {
-      let filtered = [...data.results].filter(item => (item.title).toLowerCase().includes(`${inputValue}`))
+  main.innerHTML = ''; // 함수가 실행될때마다 html을 빈 문자열로 설정
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      let filtered = [...data.results].filter((item) =>
+        item.title.toLowerCase().includes(`${inputValue}`),
+      );
 
       if (filtered.length === 0) {
         showMovies([...data.results]);
-        alert('일치하는 결과가 없습니다')
-      }
-      else {
+        alert('일치하는 결과가 없습니다');
+      } else {
         showMovies(filtered);
       }
-    })
+    });
 }
 
 //영화 보여주는 함수
@@ -98,66 +102,6 @@ function showMovies(data) {
 }
 
 // 디테일 페이지
-export function showDetail(movieId) {
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZjgyMzdlYWMxZjdiYWVlNjJiZjJmYWY1Njc4YzAyZiIsInN1YiI6IjY1MmY3MWZkMGNiMzM1MTZmNjQwYzEzNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GEIWqP736DYrah_tW9saUYSksPkL_PNWinkd8U2iuig'
-    }
-  };
-  const prevBtn = document.querySelector('.prev-button');
-  const slideContainer = document.querySelector('.movie-slider-wrapper');
-  const nextBtn = document.querySelector('.next-button');
-  let initPosition = 0;
-  let itemLength = 0;
-
-  fetch(`https://api.themoviedb.org/3/movie/${movieId}/images`, options)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-      data.backdrops.forEach((el, i) => {
-        const slideItem = document.createElement('div'); // Element
-        const slideContainer = document.querySelector('.movie-slider-wrapper');
-
-        slideContainer.append(slideItem);
-        slideItem.innerHTML = `
-        <img src="https://image.tmdb.org/t/p/w1280/${el.file_path}"/>`;
-
-        slideContainer.style.width = `${data.backdrops.length * 100}vw` // 300vw
-        slideItem.style.width = `${data.backdrops.length * 100 / data.backdrops.length}vw` // 100vw
-      })
-
-
-      // 이벤트 리스너
-      nextBtn.addEventListener('click', () => moveNext(slideContainer, data.backdrops))
-      prevBtn.addEventListener('click', () => movePrev(slideContainer))
-
-
-      // 이미지 앞으로
-      function moveNext(slideContainer, slideItem) {
-        if (itemLength < slideItem.length - 1) {
-          itemLength++;
-          initPosition -= 100;
-          slideContainer.style.transform = `translateX(${initPosition}vw)`
-        }
-      }
-
-      // 이미지 뒤로
-      function movePrev(slideContainer) {
-        if (itemLength > 0) {
-          itemLength--;
-          initPosition += 100
-          slideContainer.style.transform = `translateX(${initPosition}vw)`
-        }
-      }
-
-      // 이미지 자동 슬라이드
-      setInterval(() => {
-        moveNext(slideContainer, data.posters);
-      }, 5000)
-    })
-}
 
 renderHome();
 export const router = [
@@ -178,8 +122,15 @@ export const router = [
       const movie = await fetch(
         BASE_URL + `/movie/${movieId}?language=en-US&` + API_KEY,
       ).then((response) => response.json());
-      console.log(movieId, movie);
-      renderMovieDetail(movie);
+      const images = await fetch(
+        BASE_URL + `/movie/${movieId}/images?` + API_KEY,
+      ).then((response) => response.json());
+
+      //console.log(movieId, movie);
+      // console.log('movie detail is : ', renderMovieDetail(movie));
+      // console.log('slide is : ', showDetail(images.backdrops));
+      append(renderMovieDetail(movie), showDetail(images.backdrops));
+      //showDetail(images.backdrops);
     },
   },
 ];

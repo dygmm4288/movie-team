@@ -12,7 +12,7 @@ export function renderHome() {
 export function renderMovieDetail(movie) {
   main.style.display = 'none';
   detailPage.style.display = '';
-  movieDetail(movie);
+  return movieDetail(movie);
 }
 /* router */
 
