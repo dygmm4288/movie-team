@@ -24,7 +24,7 @@ body {
   align-items: center;
 }
 
-.logo h1>a {
+.logo h1 > a {
   text-decoration: none;
   color: var(--md-sys-color-secondary);
 }
@@ -35,7 +35,7 @@ body {
   border-radius: 5px;
   border: none;
   padding: 0.6rem 2.5rem 0.6rem 0.5rem;
-  transition: width 0.6s cubic-bezier(.03, .94, 1, 1);
+  transition: width 0.6s cubic-bezier(0.03, 0.94, 1, 1);
 }
 
 .search-container input:focus {
@@ -74,7 +74,6 @@ body {
   border: none;
   border-radius: 5px;
   background-color: var(--md-sys-color-on-primary-container);
-  ;
 }
 
 .filter-button button:hover {
@@ -96,7 +95,7 @@ body {
 }
 
 .comment-form-container input {
-  padding: .5rem 1.25rem .5rem .3rem;
+  padding: 0.5rem 1.25rem 0.5rem 0.3rem;
   border-radius: 5px;
   border: 1px solid black;
 }
@@ -130,12 +129,12 @@ body {
   background-color: var(--md-sys-color-on-primary-container);
 }
 
-
 /* COMMENT LIST */
 .comment-list-wrapper {
+  width: 80%;
   height: 250px;
   overflow: scroll;
-  padding: 1rem 1.25rem;
+  margin: 0 auto;
   list-style: none;
 }
 
@@ -150,7 +149,6 @@ body {
 .control-wrapper button {
   margin-right: 0.5rem;
 }
-
 
 /* ///////////// */
 /* CONFIRM MODAL */
@@ -192,5 +190,4 @@ body {
   cursor: pointer;
   margin-block: 1rem;
   margin-right: 12px;
-
 }
