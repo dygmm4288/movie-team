@@ -86,12 +86,10 @@ button.cardlist-btn {
 .cardlist-content{
   padding: 13px 10px;
   display: flex;
-  border: 2px solid #eae2e1;
   cursor: pointer;    /*커서를 손가락 모양으로 변경*/
 }
 .cardlist-content.heart-active{
   border-color: #f9b9c4;
-  background: #fbd0d8;
 }
 .cardlist-heart{
   position: absolute;
@@ -106,14 +104,14 @@ button.cardlist-btn {
 }
 
 .cardlist-num:before{                  
-  content: '0';
+  content: '';
   font-size: 21px;
   margin-left: 30px;
   font-weight: 600;
   color: #9C9496;
 }
 .cardlist-num.heart-active:before{     /*클릭했을때 동작 */
-  content: '1';
+  content: '';
   color: #000;
 }
 .cardlist-heart.heart-active{          /*좋아요 아이콘 애니메이션*/

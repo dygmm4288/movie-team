@@ -86,7 +86,7 @@ function showMovies(data) {
     movieEl.dataset.vote_score = vote_average;
     movieEl.innerHTML = `
     <div class="cardlist-heart-btn">
-    <div class="cardlist-content">
+    <div class="cardlist-content" id = "${id}">
       <span class="cardlist-heart"></span>
       <span class="cardlist-num"></span>
     </div>
@@ -108,9 +108,11 @@ function showMovies(data) {
 
 $(document).ready(function(){             // 상세 페이지 좋아요 버튼
   $('.cardlist-content').click(function(){
-    $('.cardlist-content').toggleClass("heart-active")
-    $('.cardlist-num').toggleClass("heart-active")
-    $('.cardlist-heart').toggleClass("heart-active")
+    var btn = $(this);
+    var id_val = btn.prop('id');
+    $('#'+id_val+'>.cardlist-content').toggleClass("heart-active")
+    $('#'+id_val+'>.cardlist-num').toggleClass("heart-active")
+    $('#'+id_val+'>.cardlist-heart').toggleClass("heart-active")
   });
 });
 
