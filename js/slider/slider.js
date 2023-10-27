@@ -1,3 +1,4 @@
+import { getStorage } from '../storage.js';
 import { append, create } from '../util.js';
 
 /* 
@@ -7,6 +8,13 @@ showDetail(initValue)
  */
 
 export function showDetail(backDrops) {
+  const movieId = new URLSearchParams(location.search).get('movieId');
+
+  if (getStorage('likes').find(el => el === Number(movieId))) {
+    const fixedHeart = document.querySelector('.fixed-heart');
+    fixedHeart.style.color = 'red';
+    fixedHeart.style.opacity = '1';
+  }
   //   const prevBtn = document.querySelector('.prev-button');
   //  const slideContainer = document.querySelector('.movie-slider-wrapper');
   //const nextBtn = document.querySelector('.next-button');
