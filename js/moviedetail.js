@@ -16,17 +16,11 @@ export function movieDetail(movie) {
       
     </div>
   </div>
-  <div class="title-large tertiary-container-text movie-body1">
-    <div class="text-gap">영화제목</div>
-    <div class="text-gap">영화개봉일</div>
-    <div class="text-gap">영화장르</div>
-    <div class="text-gap">영화평점</div>
-  </div>
-  <div class="title-large tertiary-container-text movie-body2">
-    <div class="text-gap">${movie.title}</div>
-    <div class="text-gap">${movie.release_date}</div>
-    <div class="text-gap">코미디</div>
-    <div class="text-gap">★ ${movie.vote_average}</div>
+  <div class="title-large tertiary-container-text movie-body">
+    <div class="text-gap">영화제목 &emsp;&emsp; ${movie.title}</div>
+    <div class="text-gap">영화개봉일 &emsp; ${movie.release_date}</div>
+    <div class="text-gap">영화장르 &emsp;&emsp; 코미디</div>
+    <div class="text-gap">영화평점 &emsp;&emsp; ★ ${movie.vote_average}</div>
   </div>
 </div>
 <div class="movie-summary">
