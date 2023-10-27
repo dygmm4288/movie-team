@@ -13,6 +13,12 @@ const API_URL = BASE_URL + '/discover/movie?sort_by=popularity.desc&' + API_KEY;
 
 const allInput = document.querySelectorAll('input');
 console.log(allInput);
+const headerInput = document.querySelector('.search-input');
+let inputTemp = ''; // input의 값을 임시로 저장 할 변수
+const logo = document.querySelector('.logo');
+logo.addEventListener('click', () => {
+  window.location.href = '/'
+})
 
 let inputTemp = ''; // input의 값을 임시로 저장 할 변수
 
