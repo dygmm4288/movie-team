@@ -6,7 +6,7 @@ function validate(predi) {
 // 비어있으면 안되고
 //
 function empty(s) {
-  return s !== '';
+  return s !== '' || s === undefined || s === null;
 }
 function atLeastLengt(s) {
   return s.length >= 8;

@@ -4,6 +4,18 @@
   box-sizing: border-box;
 }
 
+body {
+  position: relative;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
 #header-container {
   width: 100%;
   padding: 1rem 3rem;
@@ -12,7 +24,7 @@
   align-items: center;
 }
 
-.logo h1>a {
+.logo h1 > a {
   text-decoration: none;
   color: var(--md-sys-color-secondary);
 }
@@ -23,7 +35,7 @@
   border-radius: 5px;
   border: none;
   padding: 0.6rem 2.5rem 0.6rem 0.5rem;
-  transition: width 0.6s cubic-bezier(.03, .94, 1, 1);
+  transition: width 0.6s cubic-bezier(0.03, 0.94, 1, 1);
 }
 
 .search-container input:focus {
@@ -62,7 +74,6 @@
   border: none;
   border-radius: 5px;
   background-color: var(--md-sys-color-on-primary-container);
-  ;
 }
 
 .filter-button button:hover {
@@ -84,7 +95,7 @@
 }
 
 .comment-form-container input {
-  padding: .5rem 1.25rem .5rem .3rem;
+  padding: 0.5rem 1.25rem 0.5rem 0.3rem;
   border-radius: 5px;
   border: 1px solid black;
 }
@@ -117,3 +128,70 @@
   color: var(--md-sys-color-on-primary);
   background-color: var(--md-sys-color-on-primary-container);
 }
+
+
+/* COMMENT LIST */
+
+.comment-list-wrapper {
+  width: 80%;
+  height: 250px;
+  overflow: scroll;
+  margin: 0 auto;
+  list-style: none;
+}
+
+.comment-list-item {
+  margin-block: 1rem;
+}
+
+.control-wrapper {
+  margin-top: 0.3rem;
+}
+
+.control-wrapper button {
+  margin-right: 0.5rem;
+}
+
+/* ///////////// */
+/* CONFIRM MODAL */
+/* ///////////// */
+
+#confirm-modal {
+  position: absolute;
+  bottom: 21%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  padding: 2rem 3rem 1rem 3rem;
+  border-radius: 9px;
+  background-color: aliceblue;
+  box-shadow: 3px 1px 12px 0px;
+}
+
+.confirm-modal-form h4 {
+  margin-bottom: 0.36rem;
+}
+
+.confirm-modal-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  flex-direction: row;
+  padding: 0.35rem 1rem 0.35rem 0.3rem;
+  position: relative;
+}
+
+.confirm-modal-form button {
+  color: white;
+  background-color: var(--md-sys-color-primary-container);
+  border-radius: 5px;
+  padding: 0.3rem 0.6rem 0.36rem;
+  border: none;
+  cursor: pointer;
+  margin-block: 1rem;
+  margin-right: 12px;
+
+}
+

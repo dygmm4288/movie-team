@@ -10,13 +10,6 @@ main {
   justify-content: center;
 }
 
-.cardlist-goodicon {
-  width: 25px;
-  height: 25px;
-  object-fit: cover;
-  cursor: pointer;
-}
-
 button.cardlist-btn {
   position: absolute;
   top: 22px;

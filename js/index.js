@@ -1,12 +1,10 @@
-// import { CommentList } from './comment/CommentList.js';
-
+import { Comment } from './comment/Comment.js';
+import { CommentList } from './comment/CommentList.js';
 import { handleLocation, renderHome, renderMovieDetail } from './page.js';
 import { routing } from './router.js';
 import { showDetail } from './slider/slider.js';
 import { append } from './util.js';
-
-// // document.body.insertAdjacentElement('afterbegin', Comment(123).render());
-//document.querySelector('#detail-page').append(CommentList(123).render());
+import { validateBasic } from './validation.js';
 
 export const API_KEY = 'api_key=c929b1fb9912e2f89022f61946d45cac';
 export const BASE_URL = 'https://api.themoviedb.org/3';
@@ -35,13 +33,10 @@ function getMovies(url) {
       });
 
       // 가나다순 정렬 데이터
-      let sortedByAlpha = [...data.results].sort((a, b) => {
+      let sortedByAlpha = data.results.slice(0).sort((a, b) => {
         const upperCaseA = a.title.toUpperCase();
         const upperCaseB = b.title.toUpperCase();
-
-        if (upperCaseA > upperCaseB) return 1;
-        if (upperCaseA < upperCaseB) return -1;
-        if (upperCaseA === upperCaseB) return 0;
+        return upperCaseA > upperCaseB ? 1 : upperCaseA < upperCaseB ? -1 : 0;
       });
 
       // 각각의 정렬 버튼 클릭 시 함수 실행
@@ -59,9 +54,14 @@ export function searchMovies(url, inputValue) {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      let filtered = [...data.results].filter((item) =>
-        item.title.toLowerCase().includes(`${inputValue}`),
-      );
+      const filtered = [];
+      for (let i = 0; i < data.results.length; i++) {
+        const item = data.results[i];
+        if (!item.title.toLowerCase().includes(`${inputValue}`)) {
+          continue;
+        }
+        filtered.push(item);
+      }
 
       if (filtered.length === 0) {
         showMovies([...data.results]);
@@ -72,17 +72,16 @@ export function searchMovies(url, inputValue) {
     });
 }
 
-//영화 보여주는 함수
 function showMovies(data) {
-  main.innerHTML = ''; // 함수가 실행될때마다 html을 빈 문자열로 설정
-
-  data.forEach((movie) => {
+  main.innerHTML = '';
+  let i = 0;
+  while (i < data.length) {
+    const movie = data[i++];
     const { title, poster_path, vote_average, overview, id } = movie;
     const movieEl = document.createElement('div');
     movieEl.classList.add('movie');
     movieEl.addEventListener('click', handleLocation(`detail?movieId=${id}`));
 
-    // 평점 기준 정렬을 위해 추가
     movieEl.dataset.vote_score = vote_average;
     movieEl.innerHTML = `
     <div class="cardlist-heart-btn">
@@ -102,7 +101,7 @@ function showMovies(data) {
     `;
 
     main.appendChild(movieEl);
-  });
+  }
 }
 
 
@@ -123,29 +122,28 @@ export const router = [
   {
     path: '/',
     render: () => {
-      // 홈 페이지 일 경우에 보여줘야하는 것을 보여준다.
-      // console.log(window.href, window.location);
       renderHome();
     },
   },
   {
     path: '/detail',
     render: async () => {
-      // detail 페이지를 랜더링 한다.
-
       const movieId = new URLSearchParams(location.search).get('movieId');
       const movie = await fetch(
         BASE_URL + `/movie/${movieId}?language=en-US&` + API_KEY,
       ).then((response) => response.json());
       const images = await fetch(
-        BASE_URL + `/movie/${movieId}/images?` + API_KEY,
+        BASE_URL + `/movie/` + String(movieId) + '/images?' + API_KEY,
       ).then((response) => response.json());
 
-      //console.log(movieId, movie);
-      // console.log('movie detail is : ', renderMovieDetail(movie));
-      // console.log('slide is : ', showDetail(images.backdrops));
-      append(renderMovieDetail(movie), showDetail(images.backdrops));
-      //showDetail(images.backdrops);
+      const commentList = new CommentList(movieId).render();
+      const commentForm = new Comment(movieId).render();
+
+      append(renderMovieDetail(movie), [
+        showDetail(images.backdrops),
+        commentForm,
+        commentList,
+      ]);
     },
   },
 ];
@@ -153,8 +151,36 @@ document.querySelectorAll('a').forEach((elem) =>
   elem.addEventListener('click', (e) => {
     if (e.target.matches('[data-link]')) {
       e.preventDefault();
-      history.pushState(null, null, e.target.href);
+      history.pushState(e.target.href, null, e.target.href);
       routing(router);
     }
   }),
 );
+window.addEventListener('popstate', (e) => {
+  console.log(e, e.state);
+  switch (e.state) {
+    case '/':
+      renderHome();
+      break;
+    default:
+      routing(router);
+      break;
+  }
+});
+// search event
+const form = document.querySelector('.search-form');
+const headerInput = document.querySelector('.search-input');
+function handleSearch(e) {
+  e.preventDefault();
+  if (!validateBasic(headerInput.value)) {
+    alert('검색어를 입력하세요');
+  } else {
+    searchMovies(API_URL, headerInput.value);
+    history.pushState('/', '', '/');
+    routing(router);
+  }
+  headerInput.value = '';
+}
+form.addEventListener('submit', handleSearch);
+
+console.log(window.location);

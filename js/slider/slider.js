@@ -3,12 +3,9 @@ import { append, create } from '../util.js';
 /* 
 const urlParams = new URLSearchParams(window.location.search);
 const initValue = urlParams.get("id");
-
-
 showDetail(initValue)
-
-
  */
+
 export function showDetail(backDrops) {
   //   const prevBtn = document.querySelector('.prev-button');
   //  const slideContainer = document.querySelector('.movie-slider-wrapper');
@@ -35,7 +32,7 @@ export function showDetail(backDrops) {
     slideItem.innerHTML = `
           <img src="https://image.tmdb.org/t/p/w1280/${el.file_path}"/>`;
 
-    slideContainer.style.width = `${backDrops.length * 100}vw`; // 300vw
+    slideContainer.style.width = `${(backDrops.length * 100)}vw`; // 300vw
     slideItem.style.width = `${(backDrops.length * 100) / backDrops.length}vw`; // 100vw
   });
 

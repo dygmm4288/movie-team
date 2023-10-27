@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/theme/theme.css" />
     <link rel="stylesheet" href="./css/theme/theme.dark.css" />
-    <link rel="stylesheet" href="./css/theme/moviedetail.css" />
+    <link rel="stylesheet" href="./css/moviedetail.css" />
     <link rel="stylesheet" href="css/cardlist.css" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/slider.css" />
+    <link rel="stylesheet" href="./css/comment.css" />
     <title>영화 검색 사이트</title>
     <script src="./js/Header/header.js" type="module"></script>
     <script src="./js/index.js" type="module"></script>
     <script src="./js/slider/slider.js" defer type="module"></script>
+    <script src="./js/modal.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   </head>
   <body>
@@ -35,7 +37,7 @@
     <div class="filter-button">
       <button class="order-rate">평점 높은순</button>
       <button class="order-alphabet">가나다순</button>
-      <button class="order-init">기본순</button>
+      <button class="order-init">원래대로</button>
     </div>
 
     <main id="main"></main>
@@ -70,13 +72,6 @@
         </li>
       </ul>
     </div>
-    <div id="confirm-modal">
-      <form class="confirm-modal-form">
-        <input class="confirm-modal-input" id="confirm-modal-input" />
-
-        <button class="confirm-button">확인</button>
-        <button class="confirm-button">취소</button>
-      </form>
-    </div>
+    <div id="confirm-modal" style="display: none"></div>
   </body>
 </html>

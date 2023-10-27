@@ -1,11 +1,12 @@
 import { Element } from '../common/Element.js';
 import { getStorage, setStorage } from '../storage.js';
-import { append, create } from '../util.js';
+import { append, create, select } from '../util.js';
 import {
   validateBasic,
   validateComment,
   validatePassword,
 } from '../validation.js';
+import { CommentList } from './CommentList.js';
 export function Comment(id) {
   return new Element(() => {
     const $form = create('form', 'comment-form-container');
@@ -39,6 +40,7 @@ export function Comment(id) {
     const errorHandler = () => {
       alert('error');
     };
+
     const handleEnrollComment = (e) => {
       e.preventDefault();
       // 유효성 검사
@@ -67,6 +69,18 @@ export function Comment(id) {
         id,
         getStorage(id).concat({ id: Date.now(), nickname, password, comment }),
       );
+      console.log('등록이 완료됨');
+      alert('등록이 완료됐습니다!');
+      [
+        $commentInput,
+        $nickInput,
+        $passwordInput,
+        $confirmPasswordInput,
+      ].forEach((elem) => {
+        elem.value = '';
+      });
+      const $listWrapper = select('.comment-list-wrapper');
+      $listWrapper.replaceWith(CommentList(id).render());
     };
     // 이벤트 할당
     $form.addEventListener('submit', handleEnrollComment);
