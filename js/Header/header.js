@@ -22,6 +22,16 @@ logo.addEventListener('click', () => {
 
 
 // 검색 시 일어날 일들 (input 데이터 검사 / fetch)
+<<<<<<< HEAD
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  validateBasic(headerInput.value) !== true // input 값 유효성 검사 통과 시 searchMovie에 API URL과 input 값 전달
+    ? alert('검색어를 입력하세요') & searchMovies(API_URL)
+    : searchMovies(API_URL, headerInput.value);
+  headerInput.value = '';
+});
+=======
+>>>>>>> 13352fe7f533434cb0ff8c50d286ade6e3360dba
 
 // 브라우저 창에서 keydown 이벤트가 발생 시
 window.addEventListener('keydown', (e) => {

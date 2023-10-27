@@ -1,8 +1,12 @@
+<<<<<<< HEAD
+import { append, create, select } from "./util.js";
+=======
 import { getStorage, setStorage } from './storage.js';
 import { append, create, select } from './util.js';
+>>>>>>> 13352fe7f533434cb0ff8c50d286ade6e3360dba
 export function movieDetail(movie) {
-  const $movieCover = create('div', 'movie-cover');
-  const $movieDetail = select('#detail-page');
+  const $movieCover = create("div", "movie-cover");
+  const $movieDetail = select("#detail-page");
   const temp_html = `<div class="movie-card">
   <div class="movie-img-box">
     <div class="movie-img">
@@ -16,6 +20,17 @@ export function movieDetail(movie) {
         </div>
     </div>
   </div>
+<<<<<<< HEAD
+  <div class="title-large tertiary-container-text movie-body">
+    <div class="text-body">
+      <div><span class="text-gap">영화제목</span><span>${movie.title}</span></div>
+      <div><span>영화개봉일</span><span>${movie.release_date}</span></div>
+      <div><span class="text-gap">영화장르</span><span>${movie.genres[0].name}</span></div>
+      <div><span class="text-gap">영화평점</span><span>★ ${movie.vote_average}</span></div>
+    </div>
+    </div>
+  </div>
+=======
   <div class="title-large tertiary-container-text movie-body1">
     <div class="text-gap">영화 제목:</div>
     <div class="text-gap">영화 개봉일:</div>
@@ -29,14 +44,22 @@ export function movieDetail(movie) {
     <div class="text-gap">★ ${(movie.vote_average).toFixed(2)}</div>
   </div>
 </div>
+>>>>>>> 13352fe7f533434cb0ff8c50d286ade6e3360dba
 <div class="movie-summary">
   <div class="summary-title"><h1>줄거리</h1></div>
   <p class="summary-content">${movie.overview}</p>
 </div>`;
-  $movieCover.insertAdjacentHTML('beforeend', temp_html);
-  $movieDetail.innerHTML = '';
+  $movieCover.insertAdjacentHTML("beforeend", temp_html);
+  $movieDetail.innerHTML = "";
   append($movieDetail, $movieCover);
 
+<<<<<<< HEAD
+  const $image = document.querySelector(".back-card"),
+    $heartIcon = document.querySelector(".heart");
+
+  $image.addEventListener("click", (e) => {
+    $heartIcon.classList.add("active");
+=======
   const $image = $movieDetail.querySelector('.back-card'),
     $heartIcon = $movieDetail.querySelector('.heart'),
     $fixedHeartIcon = $movieDetail.querySelector('.fixed-heart');
@@ -51,6 +74,7 @@ export function movieDetail(movie) {
     // 만약에 빨간게 없다면 -> 추가를 해야하는거고
     // 빨갛다면 -> 삭제를 해야하고
     $heartIcon.classList.add('active');
+>>>>>>> 13352fe7f533434cb0ff8c50d286ade6e3360dba
 
     if ($fixedHeartIcon.style.color === 'red') {
       setStorage(
@@ -66,7 +90,7 @@ export function movieDetail(movie) {
     }
 
     let timeout = setTimeout(() => {
-      $heartIcon.classList.remove('active');
+      $heartIcon.classList.remove("active");
       clearTimeout(timeout);
     }, 1000);
   });
