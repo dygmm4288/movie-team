@@ -1,9 +1,11 @@
 body {
   min-height: 100vh;
   margin: 0 auto;
+  background-color: #191c1b
 }
 
 main {
+  padding: 0 12rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -27,25 +29,28 @@ button.cardlist-btn {
 
 .movie {
   width: 300px;
-  height: 480px;
+  padding: 0.5rem;
+  height: 590px;
   margin: 1rem;
-  padding: 20px 40px 0px 40px;
   border-radius: 5px;
   position: relative;
   overflow: hidden;
-  background-color: var(--md-sys-color-on-surface-dark);
+  background-color: #284b5e;
+  color: #f3f3f3;
 }
 
 .movie img {
   width: 100%;
+  object-fit: cover;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .cardlist-movie-info {
   display: flex;
+  width: 100%;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 1rem 1rem;
   letter-spacing: 0.5px;
 }
 
@@ -57,15 +62,23 @@ button.cardlist-btn {
   padding: 0.25rem 0.5rem;
 }
 
+.cardlist-movie-info span {
+  position: absolute;
+  bottom: 2%;
+  font-weight: 700;
+  color: #c9c9c9;
+}
+
 .cardlist-overview {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--md-sys-color-on-primary-container-dark);
-  padding: 1rem;
+  background-color: #121212;
+  padding: 1.25rem;
   transform: translateY(100%);
-  transition: transform 0.5s ease-in;
+  color: #c9c9c9;
+  transition: transform 0.5s ease;
 }
 
 .movie:hover .cardlist-overview {
@@ -74,4 +87,76 @@ button.cardlist-btn {
 
 .cardlist-grade {
   font-weight: bold;
+}
+
+/* // 개념적인 것들  */
+/* 독학 - 책 안 좋음
+참고서 하나쯤 사전처럼
+계속 기능을 추가하면서 프로젝트 만들기
+과제를 활용해서 더 살을 붙이기
+동적이고, 기본적인것은 100, 100, 500
+*/
+
+.cardlist-heart-btn {
+  /* 버튼 위치 조정*/
+  position: absolute;
+  top: 6%;
+  left: 14%;
+  transform: translate(-50%, -50%);
+}
+
+.cardlist-content {
+  padding: 13px 10px;
+  display: flex;
+  cursor: pointer;
+  /*커서를 손가락 모양으로 변경*/
+}
+
+.cardlist-content.heart-active {
+  border-color: #F9B9C4;
+}
+
+.cardlist-heart {
+  position: absolute;
+  background: url("../assets/img/img.png") no-repeat;
+  /*이미지 반복 X*/
+  background-position: left;
+  background-size: 2900%;
+  height: 90px;
+  width: 90px;
+  top: 50%;
+  left: 33%;
+  transform: translate(-50%, -50%);
+}
+
+.cardlist-num:before {
+  content: '';
+  font-size: 21px;
+  margin-left: 30px;
+  font-weight: 600;
+  color: #9C9496;
+}
+
+.cardlist-num.heart-active:before {
+  /*클릭했을때 동작 */
+  content: '';
+  color: #000;
+}
+
+.cardlist-heart.heart-active {
+  /*좋아요 아이콘 애니메이션*/
+  animation: animate .8s steps(28) 1;
+  background-position: right;
+}
+
+@keyframes animate {
+
+  /*좋아요 아이콘 애니메이션*/
+  0% {
+    background-position: left;
+  }
+
+  100% {
+    background-position: right;
+  }
 }
