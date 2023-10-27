@@ -4,6 +4,7 @@ import { handleLocation, renderHome, renderMovieDetail } from './page.js';
 import { routing } from './router.js';
 import { showDetail } from './slider/slider.js';
 import { append } from './util.js';
+import { validateBasic } from './validation.js';
 
 export const API_KEY = 'api_key=c929b1fb9912e2f89022f61946d45cac';
 export const BASE_URL = 'https://api.themoviedb.org/3';
@@ -42,7 +43,7 @@ function getMovies(url) {
       resetBtn.addEventListener('click', () => showMovies(data.results)); // 기본
       orderRateBtn.addEventListener('click', () => showMovies(sortedByRate));
       orderAlphabetBtn.addEventListener('click', () =>
-        showMovies(sortedByAlpha)
+        showMovies(sortedByAlpha),
       );
     });
 }
@@ -150,5 +151,20 @@ window.addEventListener('popstate', (e) => {
       break;
   }
 });
+// search event
+const form = document.querySelector('.search-form');
+const headerInput = document.querySelector('.search-input');
+function handleSearch(e) {
+  e.preventDefault();
+  if (!validateBasic(headerInput.value)) {
+    alert('검색어를 입력하세요');
+  } else {
+    searchMovies(API_URL, headerInput.value);
+    history.pushState('/', '', '/');
+    routing(router);
+  }
+  headerInput.value = '';
+}
+form.addEventListener('submit', handleSearch);
 
 console.log(window.location);
