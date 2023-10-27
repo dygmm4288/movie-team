@@ -4,6 +4,7 @@ import { handleLocation, renderHome, renderMovieDetail } from './page.js';
 import { routing } from './router.js';
 import { showDetail } from './slider/slider.js';
 import { append } from './util.js';
+import { getStorage, setStorage } from './storage.js';
 
 export const API_KEY = 'api_key=c929b1fb9912e2f89022f61946d45cac';
 export const BASE_URL = 'https://api.themoviedb.org/3';
@@ -79,7 +80,6 @@ function showMovies(data) {
     const { title, poster_path, vote_average, overview, id } = movie;
     const movieEl = document.createElement('div');
     movieEl.classList.add('movie');
-    movieEl.addEventListener('click', handleLocation(`detail?movieId=${id}`));
 
     movieEl.dataset.vote_score = vote_average;
     movieEl.innerHTML = `
@@ -92,7 +92,7 @@ function showMovies(data) {
     <img src="${IMG_URL + poster_path}" alt="${title}">
     <div class="cardlist-movie-info">
       <h3>${title}</h3>
-      <span>${vote_average}</span>
+      <span>평점: ${String(vote_average).padEnd(2)}</span>
     </div>
       <div class="cardlist-overview">
         ${overview}
@@ -100,19 +100,42 @@ function showMovies(data) {
     `;
 
     main.appendChild(movieEl);
+    Array.from(movieEl.childNodes)[3].addEventListener('click', handleLocation(`detail?movieId=${id}`))
+
+    const cardlistHeart = movieEl.querySelector('.cardlist-heart');
+
+    if (new Set(getStorage('likes') || []).has(id)) {
+      cardlistHeart.classList.add('heart-active');
+    }
+
+    cardlistHeart.addEventListener('click', () => {
+      if (cardlistHeart.classList.contains('heart-active')) {
+        setStorage(
+          'likes',
+          [...new Set(getStorage('likes') || [])].filter((v) => v !== id),
+        );
+      } else {
+        setStorage('likes', [...new Set(getStorage('likes'))].concat(id));
+      }
+      cardlistHeart.classList.toggle('heart-active');
+    });
   }
+
 }
-
-
-$(document).ready(function () {             // 상세 페이지 좋아요 버튼
-  $('.cardlist-content').click(function () {
-    var btn = $(this);
-    var id_val = btn.prop('id');
-    $('#' + id_val + '>.cardlist-content').toggleClass("heart-active")
-    $('#' + id_val + '>.cardlist-num').toggleClass("heart-active")
-    $('#' + id_val + '>.cardlist-heart').toggleClass("heart-active")
-  });
+// 상세 페이지 좋아요 버튼
+$('.cardlist-content').click(function () {
+  var btn = $(this);
+  var id_val = btn.prop('id');
+  $('#' + id_val + '>.cardlist-content').toggleClass("heart-active")
+  $('#' + id_val + '>.cardlist-num').toggleClass("heart-active")
+  $('#' + id_val + '>.cardlist-heart').toggleClass("heart-active")
+  setStorage('like', id_val)
 });
+
+
+
+
+
 
 // 디테일 페이지
 

@@ -3,8 +3,6 @@
 ////////////////////////////////////////////////////
 
 // module
-import { searchMovies } from '../index.js';
-import { validateBasic } from '../validation.js';
 
 // API OPTIONS
 const API_KEY = 'api_key=c929b1fb9912e2f89022f61946d45cac';
@@ -12,7 +10,7 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 const API_URL = BASE_URL + '/discover/movie?sort_by=popularity.desc&' + API_KEY;
 
 // variables
-const form = document.querySelector('.search-form');
+
 const allInput = document.querySelectorAll('input');
 console.log(allInput);
 const headerInput = document.querySelector('.search-input');
@@ -24,14 +22,6 @@ logo.addEventListener('click', () => {
 
 
 // 검색 시 일어날 일들 (input 데이터 검사 / fetch)
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  validateBasic(headerInput.value) !== true // input 값 유효성 검사 통과 시 searchMovie에 API URL과 input 값 전달
-    ? alert('검색어를 입력하세요')
-    : searchMovies(API_URL, headerInput.value);
-  headerInput.value = '';
-});
-
 
 // 브라우저 창에서 keydown 이벤트가 발생 시
 window.addEventListener('keydown', (e) => {
