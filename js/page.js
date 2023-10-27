@@ -22,6 +22,7 @@ export function handleLocation(link) {
   return (e) => {
     e.preventDefault();
     console.log(link);
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     history.pushState(link, null, window.location.href + link);
     routing(router);
   };
