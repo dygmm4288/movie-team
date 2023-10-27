@@ -75,3 +75,67 @@ button.cardlist-btn {
 .cardlist-grade {
   font-weight: bold;
 }
+
+.cardlist-heart-btn {
+  /* 버튼 위치 조정*/
+  position: absolute;
+  top: 11%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+}
+
+.cardlist-content {
+  padding: 13px 10px;
+  display: flex;
+  cursor: pointer;
+  /*커서를 손가락 모양으로 변경*/
+}
+
+.cardlist-content.heart-active {
+  border-color: #F9B9C4;
+}
+
+.cardlist-heart {
+  position: absolute;
+  background: url(“../img.png”) no-repeat;
+  /*이미지 반복 X*/
+  background-position: left;
+  background-size: 2900%;
+  height: 90px;
+  width: 90px;
+  top: 50%;
+  left: 33%;
+  transform: translate(-50%, -50%);
+}
+
+.cardlist-num:before {
+  content: '';
+  font-size: 21px;
+  margin-left: 30px;
+  font-weight: 600;
+  color: #9C9496;
+}
+
+.cardlist-num.heart-active:before {
+  /*클릭했을때 동작 */
+  content: '';
+  color: #000;
+}
+
+.cardlist-heart.heart-active {
+  /*좋아요 아이콘 애니메이션*/
+  animation: animate .8s steps(28) 1;
+  background-position: right;
+}
+
+@keyframes animate {
+
+  /*좋아요 아이콘 애니메이션*/
+  0% {
+    background-position: left;
+  }
+
+  100% {
+    background-position: right;
+  }
+}
