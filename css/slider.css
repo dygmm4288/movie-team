@@ -4,7 +4,7 @@
 
 .movie-slider-container {
   width: 100%;
-  height: 800px;
+  height: 515px;
   border: 1px solid black;
   overflow: hidden;
   position: relative;
@@ -13,8 +13,8 @@
 }
 
 .movie-slider-wrapper {
-  width: 300vw;
   display: flex;
+  align-items: center;
   height: 100%;
   transition: transform 0.8s ease;
   transform: translateX(0vw);
@@ -33,7 +33,11 @@
 }
 
 .movie-slide-item {
-  width: 100vw;
+  width: 100%;
+  height: 100%;
+  margin-right: 300px;
+  background-color: #2c2c2c;
+  padding: 3rem;
 }
 
 .movie-slider-container button {
@@ -48,9 +52,10 @@
 }
 
 .movie-slide-item img {
-  width: 100vw;
-  height: 100%;
-  object-fit: cover;
+  display: block;
+  margin-left: 7.3rem;
+  width: 75%;
+  object-fit: contain;
 }
 
 .movie-slider-container button:nth-child(2),

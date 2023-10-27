@@ -34,12 +34,8 @@ form.addEventListener('submit', (e) => {
 window.addEventListener('keydown', (e) => {
   // dataset 속성의 값이 지금 누른 키와 같은 요소를 찾고
   const slash = document.querySelector(`input[data-key = ${e.code}]`);
-
   // 요소가 없다면 아무 일도 일어나지 않음
   if (!slash) return;
-
-  // 창 내에 어딘가 focus가 되어있고 그 요소의 anchorOffset이 3 미만이라면 아무일도 일어나지 않음
-  if (window.getSelection().anchorOffset < 3) return;
 
   // 요소가 있다면 그 요소에 focus 하고
   slash.focus();
