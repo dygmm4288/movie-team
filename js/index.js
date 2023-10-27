@@ -118,8 +118,9 @@ export const router = [
         BASE_URL + `/movie/${movieId}?language=en-US&` + API_KEY,
       ).then((response) => response.json());
       const images = await fetch(
-        BASE_URL + `/movie/${movieId}/images?` + API_KEY,
+        BASE_URL + `/movie/` + String(movieId) + '/images?' + API_KEY,
       ).then((response) => response.json());
+
       const commentList = new CommentList(movieId).render();
       const commentForm = new Comment(movieId).render();
 
