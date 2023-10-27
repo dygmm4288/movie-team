@@ -108,9 +108,19 @@
   padding: 1rem;
   white-space: nowrap;
 }
-.text-gap {
+
+.text-body div {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  gap: 2rem;
   margin-bottom: 15px;
 }
+
+.text-gap {
+  margin-right: 1.5rem;
+}
+
 .movie-summary {
   border-radius: 15px;
   margin-top: 10px;
