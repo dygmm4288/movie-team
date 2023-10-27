@@ -1,8 +1,9 @@
 import { router } from './index.js';
 import { movieDetail } from './moviedetail.js';
 import { routing } from './router.js';
+import { select } from './util.js';
 
-const main = document.querySelector('#main');
+const main = select('#main');
 const detailPage = document.querySelector('#detail-page');
 const filterButton = document.querySelector('.filter-button');
 export function renderHome() {

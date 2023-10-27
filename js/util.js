@@ -40,3 +40,6 @@ export const makeIdGenerator = function* () {
     yield id++;
   }
 };
+export const not = function (x) {
+  return (y) => x !== y;
+};
