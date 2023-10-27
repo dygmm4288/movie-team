@@ -17,7 +17,10 @@ const allInput = document.querySelectorAll('input');
 console.log(allInput);
 const headerInput = document.querySelector('.search-input');
 let inputTemp = ''; // input의 값을 임시로 저장 할 변수
-
+const logo = document.querySelector('.logo');
+logo.addEventListener('click', () => {
+  window.location.href = '/'
+})
 
 
 // 검색 시 일어날 일들 (input 데이터 검사 / fetch)
