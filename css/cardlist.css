@@ -76,6 +76,7 @@ button.cardlist-btn {
   font-weight: bold;
 }
 
+
 .cardlist-heart-btn {
   /* 버튼 위치 조정*/
   position: absolute;
@@ -92,12 +93,12 @@ button.cardlist-btn {
 }
 
 .cardlist-content.heart-active {
-  border-color: #F9B9C4;
+  border-color: #f9b9c4;
 }
 
 .cardlist-heart {
   position: absolute;
-  background: url(“../img.png”) no-repeat;
+  background: url("../img.png") no-repeat;
   /*이미지 반복 X*/
   background-position: left;
   background-size: 2900%;
