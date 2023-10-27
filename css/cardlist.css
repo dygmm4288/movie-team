@@ -79,12 +79,14 @@ button.cardlist-btn {
 .cardlist-heart-btn {
   /* 버튼 위치 조정*/
   position: absolute;
-  top: 11%;
-  left: 25%;
+  width: 64px;
+  height: 64px;
+
+  top: 1rem;
+  left: 1rem;
   transform: translate(-50%, -50%);
 }
 .cardlist-content {
-  padding: 13px 10px;
   display: flex;
   cursor: pointer; /*커서를 손가락 모양으로 변경*/
 }
@@ -92,15 +94,11 @@ button.cardlist-btn {
   border-color: #f9b9c4;
 }
 .cardlist-heart {
-  position: absolute;
   background: url('../assets/img/img.png') no-repeat; /*이미지 반복 X*/
   background-position: left;
   background-size: 2900%;
-  height: 90px;
-  width: 90px;
-  top: 50%;
-  left: 33%;
-  transform: translate(-50%, -50%);
+  height: 64px;
+  width: 64px;
 }
 
 .cardlist-num:before {

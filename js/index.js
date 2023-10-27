@@ -3,6 +3,7 @@ import { CommentList } from './comment/CommentList.js';
 import { handleLocation, renderHome, renderMovieDetail } from './page.js';
 import { routing } from './router.js';
 import { showDetail } from './slider/slider.js';
+import { getStorage, setStorage } from './storage.js';
 import { append } from './util.js';
 import { validateBasic } from './validation.js';
 
@@ -85,22 +86,38 @@ function showMovies(data) {
     movieEl.dataset.vote_score = vote_average;
     movieEl.innerHTML = `
       <div class="cardlist-heart-btn">
-    <div class="cardlist-content" id = "${id}">
-      <span class="cardlist-heart"></span>
-      <span class="cardlist-num"></span>
-    </div>
-    </div>
-    <img src="${IMG_URL + poster_path}" alt="${title}">
-    <div class="cardlist-movie-info">
-      <h3>${title}</h3>
-      <span>${vote_average}</span>
-    </div>
+        <div class="cardlist-content" data-id="${id}">
+          <span class="cardlist-heart"></span> 
+        </div>
+      </div>
+      <img src="${IMG_URL + poster_path}" alt="${title}">
+      <div class="cardlist-movie-info">
+        <h3>${title}</h3>
+        <span>${vote_average}</span>
+      </div>
       <div class="cardlist-overview">
-        ${overview}
+          ${overview}
       </div>
     `;
 
     main.appendChild(movieEl);
+    const cardlistHeart = movieEl.querySelector('.cardlist-heart');
+
+    if (new Set(getStorage('likes') || []).has(id)) {
+      cardlistHeart.classList.add('heart-active');
+    }
+
+    cardlistHeart.addEventListener('click', () => {
+      if (cardlistHeart.classList.contains('heart-active')) {
+        setStorage(
+          'likes',
+          [...new Set(getStorage('likes') || [])].filter((v) => v !== id),
+        );
+      } else {
+        setStorage('likes', [...new Set(getStorage('likes'))].concat(id));
+      }
+      cardlistHeart.classList.toggle('heart-active');
+    });
   }
 }
 

@@ -74,9 +74,9 @@
   transform: translate(-50%, -50%);
 }
 .heart.active {
-  animation: animate 0.8s linear;
+  animation: backHeart 0.8s linear;
 }
-@keyframes animate {
+@keyframes backHeart {
   30% {
     opacity: 1;
     font-size: 80px;

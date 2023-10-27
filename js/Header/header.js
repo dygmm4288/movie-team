@@ -17,23 +17,22 @@ const headerInput = document.querySelector('.search-input');
 let inputTemp = ''; // input의 값을 임시로 저장 할 변수
 const logo = document.querySelector('.logo');
 logo.addEventListener('click', () => {
-  window.location.href = '/'
-})
-
-let inputTemp = ''; // input의 값을 임시로 저장 할 변수
-
+  window.location.href = '/';
+});
 // 검색 시 일어날 일들 (input 데이터 검사 / fetch)
 
 // 브라우저 창에서 keydown 이벤트가 발생 시
 window.addEventListener('keydown', (e) => {
-
   // dataset 속성의 값이 지금 누른 키와 같은 요소를 찾고
   const slash = document.querySelector(`input[data-key = ${e.code}]`);
   // 요소가 없다면 아무 일도 일어나지 않음
   if (!slash) return;
   // 활성 요소가 없으면 인풋으로 focus
-  if (Array.from(document.querySelectorAll('input')).every(el => el !== document.activeElement))
-
+  if (
+    Array.from(document.querySelectorAll('input')).every(
+      (el) => el !== document.activeElement,
+    )
+  )
     // 요소가 있다면 그 요소에 focus 하고
     slash.focus();
 

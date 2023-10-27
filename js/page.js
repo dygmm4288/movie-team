@@ -21,6 +21,10 @@ export function renderMovieDetail(movie) {
 export function handleLocation(link) {
   return (e) => {
     e.preventDefault();
+
+    if (e.target.classList.contains('cardlist-heart')) {
+      return;
+    }
     console.log(link);
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     history.pushState(link, null, window.location.href + link);
