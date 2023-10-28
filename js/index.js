@@ -92,7 +92,7 @@ function showMovies(data) {
     <img src="${IMG_URL + poster_path}" alt="${title}">
     <div class="cardlist-movie-info">
       <h3>${title}</h3>
-      <span>평점: ${String(vote_average).padEnd(2)}</span>
+      <span>평점: ${Number(vote_average).toFixed(1)}</span>
     </div>
       <div class="cardlist-overview">
         ${overview}
