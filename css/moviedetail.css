@@ -118,21 +118,6 @@
     opacity: 0;
   }
 }
-
-<<<<<<< HEAD
-.movie-body {
-  width: 100%;
-  height: 250px;
-  padding: 1rem;
-  white-space: nowrap;
-}
-
-.text-body div {
-  display: flex;
-  align-items: center;
-  text-align: left;
-  gap: 2rem;
-=======
 .movie-body1 {
   width: 150px;
   height: 250px;
@@ -153,18 +138,12 @@
 }
 
 .text-gap {
->>>>>>> 13352fe7f533434cb0ff8c50d286ade6e3360dba
   margin-bottom: 15px;
   color: white;
 }
 
-<<<<<<< HEAD
-.text-gap {
-  margin-right: 1.5rem;
-=======
 .movie-card {
   width: 100%;
->>>>>>> 13352fe7f533434cb0ff8c50d286ade6e3360dba
 }
 
 .movie-summary {

@@ -14,7 +14,6 @@
     <script src="./js/Header/header.js" type="module"></script>
     <script src="./js/index.js" type="module"></script>
     <script src="./js/slider/slider.js" defer type="module"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   </head>
   <body>
     <header id="header-container" class="primary-container">
@@ -52,24 +51,15 @@
       </div>
 
       <form class="comment-form-container">
-        <input type="text" class="primary-input" id="comment" />
+        <!-- <input type="text" class="primary-input" id="comment" />
         <div class="user-info-container">
           <input type="text" class="user-info-item" id="nickname" />
           <input type="password" class="user-info-item" id="password" />
           <input type="password" class="user-info-item" id="confiromPassword" />
         </div>
-        <button class="comment-btn" type="submit">등록</button>
+        <button class="comment-btn" type="submit">등록</button> -->
       </form>
-      <ul class="comment-list-wrapper">
-        <li class="comment-list-item">
-          <p class="comment-desc">{comment}</p>
-          <!-- <textarea class="comment-desc">{comment}</textarea> -->
-          <div class="control-wrapper">
-            <button class="comment-update-btn">수정</button>
-            <button class="comment-remove-btn">삭제</button>
-          </div>
-        </li>
-      </ul>
+      <ul class="comment-list-wrapper"></ul>
     </div>
     <div id="confirm-modal"></div>
   </body>
