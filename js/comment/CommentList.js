@@ -167,7 +167,7 @@ function CommentListItem(
     $updateBtn.addEventListener('click', handleUpdate);
 
     $removeBtn.addEventListener('click', handleRemove);
-    append($controlWrapper, [$updateBtn, $removeBtn]);
+    append($controlWrapper, [$nickSpan, $updateBtn, $removeBtn]);
     append($commentItem, [$comment, $controlWrapper]);
 
     return [
