@@ -34,6 +34,7 @@
   align-items: center;
   flex-direction: row;
   gap: 10px;
+  position: relative;
 }
 
 .confirm-modal-form {
@@ -66,4 +67,8 @@
 .comment-list-item {
   border-bottom: 1px dotted #eee;
   padding-bottom: 1rem;
+}
+.comment-span {
+  position: absolute;
+  left: 1rem;
 }

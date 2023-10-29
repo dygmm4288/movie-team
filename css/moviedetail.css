@@ -118,53 +118,28 @@
     opacity: 0;
   }
 }
-
-<<<<<<< HEAD
 .movie-body {
   width: 100%;
   height: 250px;
   padding: 1rem;
   white-space: nowrap;
 }
-
 .text-body div {
   display: flex;
   align-items: center;
   text-align: left;
   gap: 2rem;
-=======
-.movie-body1 {
-  width: 150px;
-  height: 250px;
-  padding: 1rem;
-  padding-top: 2rem;
-  flex-grow: 0;
-  flex-shrink: 0;
-}
-
-.movie-body2 {
-  width: 150px;
-  height: 250px;
-  padding: 0.9rem;
-  padding-top: 2rem;
-  flex-grow: 0;
-  flex-shrink: 0;
-  font-weight: 600;
-}
-
-.text-gap {
->>>>>>> 13352fe7f533434cb0ff8c50d286ade6e3360dba
   margin-bottom: 15px;
   color: white;
 }
 
-<<<<<<< HEAD
 .text-gap {
   margin-right: 1.5rem;
-=======
+  color: white;
+}
+
 .movie-card {
   width: 100%;
->>>>>>> 13352fe7f533434cb0ff8c50d286ade6e3360dba
 }
 
 .movie-summary {
