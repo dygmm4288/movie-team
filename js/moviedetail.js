@@ -1,5 +1,5 @@
-import { getStorage, setStorage } from './storage.js';
-import { append, create, select } from './util.js';
+import { getStorage, setStorage } from "./storage.js";
+import { append, create, select } from "./util.js";
 
 export function movieDetail({
   poster_path,
@@ -10,8 +10,8 @@ export function movieDetail({
   id,
   overview,
 }) {
-  const $movieCover = create('div', 'movie-cover');
-  const $movieDetail = select('#detail-page');
+  const $movieCover = create("div", "movie-cover");
+  const $movieDetail = select("#detail-page");
   const temp_html = `
   <div class="movie-card">
     <div class="movie-img-box">
@@ -26,17 +26,18 @@ export function movieDetail({
       </div>
     </div>
   </div>
-  <div class="title-large tertiary-container-text movie-body1">
-    <div class="text-gap">영화 제목:</div>
-    <div class="text-gap">영화 개봉일:</div>
-    <div class="text-gap">영화 장르:</div>
-    <div class="text-gap">영화 평점:</div>
-  </div>
-  <div class="title-large tertiary-container-text movie-body2">
-    <div class="text-gap">${title}</div>
-    <div class="text-gap">${release_date}</div>
-    <div class="text-gap">${genres[0].name}</div>
-    <div class="text-gap">★ ${vote_average.toFixed(2)}</div>
+  <div class="title-large tertiary-container-text movie-body">
+    <div class="text-body">
+      <div><span class="text-gap">영화제목</span><span>${title}</span></div>
+      <div><span>영화개봉일</span><span>${release_date}</span></div>
+      <div><span class="text-gap">영화장르</span><span>${
+        genres[0].name
+      }</span></div>
+      <div><span class="text-gap">영화평점</span><span>★ ${Number(
+        vote_average,
+      ).toFixed(1)}</span></div>
+    </div>
+</div>
   </div>
   <div class="movie-summary">
     <div class="summary-title">
@@ -45,33 +46,33 @@ export function movieDetail({
     <p class="summary-content">${overview}</p>
   </div>
 `;
-  $movieCover.insertAdjacentHTML('beforeend', temp_html);
-  $movieDetail.innerHTML = '';
+  $movieCover.insertAdjacentHTML("beforeend", temp_html);
+  $movieDetail.innerHTML = "";
   append($movieDetail, $movieCover);
 
-  const $image = $movieDetail.querySelector('.back-card'),
-    $heartIcon = $movieDetail.querySelector('.heart'),
-    $fixedHeartIcon = $movieDetail.querySelector('.fixed-heart');
+  const $image = $movieDetail.querySelector(".back-card"),
+    $heartIcon = $movieDetail.querySelector(".heart"),
+    $fixedHeartIcon = $movieDetail.querySelector(".fixed-heart");
 
-  $image.addEventListener('click', (e) => {
-    $heartIcon.classList.add('active');
-    const likes = new Set(getStorage('likes') || []);
+  $image.addEventListener("click", (e) => {
+    $heartIcon.classList.add("active");
+    const likes = new Set(getStorage("likes") || []);
 
-    if ($fixedHeartIcon.style.color === 'red') {
+    if ($fixedHeartIcon.style.color === "red") {
       const removedIds = [
         ...new Set([...likes].filter((likeId) => likeId !== id)),
       ];
-      setStorage('likes', removedIds);
-      $fixedHeartIcon.style.color = 'rgb(171, 171, 171)';
+      setStorage("likes", removedIds);
+      $fixedHeartIcon.style.color = "rgb(171, 171, 171)";
     } else {
       const nextIds = [...new Set([...likes].concat(id))];
-      setStorage('likes', nextIds);
-      $fixedHeartIcon.style.color = 'red';
-      $fixedHeartIcon.style.opacity = '1';
+      setStorage("likes", nextIds);
+      $fixedHeartIcon.style.color = "red";
+      $fixedHeartIcon.style.opacity = "1";
     }
 
     let timeout = setTimeout(() => {
-      $heartIcon.classList.remove('active');
+      $heartIcon.classList.remove("active");
       clearTimeout(timeout);
     }, 1000);
   });

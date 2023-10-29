@@ -1,11 +1,11 @@
-import { Element } from '../common/Element.js';
-import { getStorage, setStorage } from '../storage.js';
-import { append, create, select } from '../util.js';
-import { validateBasic } from '../validation.js';
+import { Element } from "../common/Element.js";
+import { getStorage, setStorage } from "../storage.js";
+import { append, create, select } from "../util.js";
+import { validateBasic } from "../validation.js";
 
 export function CommentList(id) {
   return new Element(() => {
-    const $listWrapper = create('ul', 'comment-list-wrapper');
+    const $listWrapper = create("ul", "comment-list-wrapper");
     const commentLists = getStorage(id);
     let commentItems = [];
     // updateComment(commetId:name,commentText: text)
@@ -39,8 +39,8 @@ export function CommentList(id) {
         return true;
       });
       if (!success) {
-        console.error('삭제에 실패했습니다.');
-        alert('비밀번호가 일치하지 않습니다!');
+        console.error("삭제에 실패했습니다.");
+        alert("비밀번호가 일치하지 않습니다!");
         return;
       }
       setStorage(id, nextComments);
@@ -48,7 +48,7 @@ export function CommentList(id) {
     };
     const render = (commentLists) => {
       commentItems.forEach((commentItem) => commentItem.remove());
-      $listWrapper.innerHTML = '';
+      $listWrapper.innerHTML = "";
       commentItems = commentLists?.map(
         ({ comment, id, password, nickname }) => {
           const item = CommentListItem(
@@ -77,25 +77,25 @@ function CommentListItem(
   removeComment,
 ) {
   return new Element(() => {
-    const $commentItem = create('li', 'comment-list-item');
-    const $comment = create('p', 'comment-desc');
-    const $updateComment = create('textarea', 'comment-desc');
-    const $modalWrapper = select('#confirm-modal');
+    const $commentItem = create("li", "comment-list-item");
+    const $comment = create("p", "comment-desc");
+    const $updateComment = create("textarea", "comment-desc");
+    const $modalWrapper = select("#confirm-modal");
 
-    const $controlWrapper = create('div', 'control-wrapper');
-    const $nickSpan = create('span', 'comment-span');
-    const $updateBtn = create('button', 'comment-update-btn');
-    const $removeBtn = create('button', 'comment-remove-btn');
+    const $controlWrapper = create("div", "control-wrapper");
+    const $nickSpan = create("span", "comment-span");
+    const $updateBtn = create("button", "comment-update-btn");
+    const $removeBtn = create("button", "comment-remove-btn");
 
     $comment.innerText = comment;
-    $updateBtn.innerText = '수정';
-    $removeBtn.innerText = '삭제';
+    $updateBtn.innerText = "수정";
+    $removeBtn.innerText = "삭제";
     $nickSpan.innerText = nickname;
 
     function convert(a, b) {
       // remove a and b insert after begin
       a.remove();
-      $commentItem.insertAdjacentElement('afterbegin', b);
+      $commentItem.insertAdjacentElement("afterbegin", b);
     }
     /* const processForm = (func) => {
         const $modalForm = CommentConfirmForm(
@@ -112,23 +112,23 @@ function CommentListItem(
         handlerCancleButton,
         password,
       );
-      $modalWrapper.innerHTML = '';
+      $modalWrapper.innerHTML = "";
 
       append($modalWrapper, $modalForm.render());
     }
 
     const handleUpdate = (e) => {
-      const modalForm = document.querySelector('#confirm-modal');
-      modalForm.style.display = 'block';
+      const modalForm = document.querySelector("#confirm-modal");
+      modalForm.style.display = "block";
 
-      const isCanUpdate = $commentItem.querySelector('p');
+      const isCanUpdate = $commentItem.querySelector("p");
       const prevValue = $comment.innerText;
       if (isCanUpdate) {
         // "수정" 상태라면
         enrollModalForm(() => {
           $updateComment.value = $comment.innerText;
           convert($comment, $updateComment);
-          $updateBtn.innerText = '수정 완료';
+          $updateBtn.innerText = "수정 완료";
           handlerCancleButton();
         });
 
@@ -137,7 +137,7 @@ function CommentListItem(
       // 이미 변화돼어있는 상태라면
 
       const nextValue = $updateComment.value;
-      $updateBtn.innerText = '수정';
+      $updateBtn.innerText = "수정";
       convert($comment, $updateComment);
       if (prevValue === nextValue || !validateBasic(nextValue)) {
         // 내용의 변화가 없다면
@@ -146,12 +146,12 @@ function CommentListItem(
         return;
       }
       // 내용의 변화가 있다면
-      modalForm.style.display = 'none';
+      modalForm.style.display = "none";
       updateComment(id, nextValue);
     };
     const handleRemove = () => {
-      const modalForm = document.querySelector('#confirm-modal');
-      modalForm.style.display = 'block';
+      const modalForm = document.querySelector("#confirm-modal");
+      modalForm.style.display = "block";
       enrollModalForm(() => {
         // 여기서는 만약 비밀번호가 일치한다면
         removeComment(id, password);
@@ -159,68 +159,68 @@ function CommentListItem(
       });
     };
     const handlerCancleButton = () => {
-      $modalWrapper.innerHTML = '';
-      const modalForm = document.querySelector('#confirm-modal');
-      modalForm.style.display = 'none';
+      $modalWrapper.innerHTML = "";
+      const modalForm = document.querySelector("#confirm-modal");
+      modalForm.style.display = "none";
     };
 
-    $updateBtn.addEventListener('click', handleUpdate);
+    $updateBtn.addEventListener("click", handleUpdate);
 
-    $removeBtn.addEventListener('click', handleRemove);
-    append($controlWrapper, [$updateBtn, $removeBtn]);
+    $removeBtn.addEventListener("click", handleRemove);
+    append($controlWrapper, [$nickSpan, $updateBtn, $removeBtn]);
     append($commentItem, [$comment, $controlWrapper]);
 
     return [
       $commentItem,
       [
-        { type: 'click', element: $updateBtn, handlerFunc: handleUpdate },
-        { type: 'click', element: $removeBtn, handlerFunc: handleRemove },
+        { type: "click", element: $updateBtn, handlerFunc: handleUpdate },
+        { type: "click", element: $removeBtn, handlerFunc: handleRemove },
       ],
     ];
   });
 }
 function CommentConfirmForm(controlFunction, handlerCancleButton, password) {
   return new Element(() => {
-    const $form = create('form', 'confirm-modal-form');
+    const $form = create("form", "confirm-modal-form");
     const $input = create(
-      'input',
-      'confirm-modal-input',
-      'confirm-modal-input',
+      "input",
+      "confirm-modal-input",
+      "confirm-modal-input",
       {
-        type: 'password',
-        placeholder: '비밀번호를 입력해 주세요',
+        type: "password",
+        placeholder: "비밀번호를 입력해 주세요",
       },
     );
-    const $heading = create('h4');
-    const $submitButton = create('button', 'confirm-button', '', {
-      type: 'submit',
+    const $heading = create("h4");
+    const $submitButton = create("button", "confirm-button", "", {
+      type: "submit",
     });
-    const $cancleButton = create('button', 'cancle-button', '');
+    const $cancleButton = create("button", "cancle-button", "");
 
-    $heading.innerText = '게시물 비밀번호';
-    $submitButton.innerText = '확인';
-    $cancleButton.innerText = '취소';
+    $heading.innerText = "게시물 비밀번호";
+    $submitButton.innerText = "확인";
+    $cancleButton.innerText = "취소";
 
     const handlerConfirmButton = function (e) {
       e.preventDefault();
       const value = $input.value;
 
       if (value !== password) {
-        console.error('비밀번호가 일치하지 않습니다.');
-        alert('비밀번호가 일치하지 않습니다.');
-        $input.value = '';
+        console.error("비밀번호가 일치하지 않습니다.");
+        alert("비밀번호가 일치하지 않습니다.");
+        $input.value = "";
         $input.focus();
         return;
       }
 
       controlFunction();
 
-      const modalForm = document.querySelector('#confirm-modal');
-      modalForm.style.display = 'none';
-      $form.removeEventListener('submit', handlerConfirmButton);
+      const modalForm = document.querySelector("#confirm-modal");
+      modalForm.style.display = "none";
+      $form.removeEventListener("submit", handlerConfirmButton);
     };
-    $form.addEventListener('submit', handlerConfirmButton);
-    $cancleButton.addEventListener('click', handlerCancleButton);
+    $form.addEventListener("submit", handlerConfirmButton);
+    $cancleButton.addEventListener("click", handlerCancleButton);
 
     append($form, [$heading, $input, $submitButton, $cancleButton]);
     return [$form];
