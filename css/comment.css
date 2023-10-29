@@ -1,0 +1,74 @@
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  height: 30%;
+  background: #d3d3d3;
+  border-radius: 10px;
+}
+
+.comment-desc {
+  width: 100%;
+}
+
+.comment-form-container {
+  padding: 0 15rem;
+}
+
+.comment-list-wrapper {
+  width: 75%;
+  height: 200px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background-color: #0f0f0f;
+  color: white;
+  padding: 1rem 5rem;
+  border-radius: 5px;
+  margin-block: 1rem;
+}
+
+.control-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  position: relative;
+}
+
+.confirm-modal-form {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.control-wrapper button {
+  width: 60px;
+  cursor: pointer;
+  color: white;
+  padding: 0.35rem 0.15rem;
+  background-color: var(--md-sys-color-primary-container);
+  border-radius: 5px;
+  border: none;
+  margin: 0;
+  transition: all 0.3s ease;
+  font-weight: 700;
+}
+
+.control-wrapper button:hover,
+.confirm-modal-form button:hover {
+  color: var(--md-sys-color-on-primary);
+  background-color: var(--md-sys-color-on-primary-container);
+}
+
+.comment-list-item {
+  border-bottom: 1px dotted #eee;
+  padding-bottom: 1rem;
+}
+.comment-span {
+  position: absolute;
+  left: 1rem;
+}

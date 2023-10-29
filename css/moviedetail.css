@@ -1,0 +1,164 @@
+.movie-cover {
+  width: 100%;
+  border-radius: 15px;
+  padding: 3rem 15rem;
+  justify-content: center;
+}
+
+.movie-card {
+  border-radius: 15px;
+  align-items: center;
+  flex-direction: row;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.movie-img-box {
+  width: 200px;
+  height: 300px;
+  perspective: 1000px;
+  flex-basis: 200px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.movie-img-box:hover .movie-img {
+  transform: rotateY(-180deg);
+  cursor: pointer;
+}
+
+.movie-img {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  color: white;
+  line-height: 400px;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  transition: 0.5s;
+}
+
+.front-card {
+  border-radius: 15px;
+  border-color: white;
+  box-shadow: 3px 2px 15px 0 rgb(79, 79, 79);
+}
+
+.back-card {
+  background-color: #f7fcff;
+  text-align: center;
+  border-radius: 15px;
+  border-color: white;
+  box-shadow: 4px 8px 16px 0 rgb(75, 127, 173);
+  transform: rotateY(180deg);
+  position: relative;
+}
+
+.fixed-heart {
+  font-size: 30px;
+  color: rgb(171, 171, 171);
+  opacity: 0.5;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.front-card,
+.back-card {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.movie-img .heart {
+  position: absolute;
+  font-size: 40px;
+  color: red;
+  left: 50%;
+  top: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+}
+
+.heart.active {
+  animation: heartani 0.8s linear;
+}
+
+@keyframes heartani {
+  30% {
+    opacity: 1;
+    font-size: 80px;
+  }
+
+  50% {
+    opacity: 1;
+    font-size: 60px;
+  }
+
+  70% {
+    opacity: 1;
+    font-size: 70px;
+  }
+
+  80% {
+    opacity: 1;
+    font-size: 60px;
+  }
+
+  90% {
+    opacity: 1;
+    font-size: 60px;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+.movie-body {
+  width: 100%;
+  height: 250px;
+  padding: 1rem;
+  white-space: nowrap;
+}
+.text-body div {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  gap: 2rem;
+  margin-bottom: 15px;
+  color: white;
+}
+
+.text-gap {
+  margin-right: 1.5rem;
+  color: white;
+}
+
+.movie-card {
+  width: 100%;
+}
+
+.movie-summary {
+  border-radius: 15px;
+  margin-top: 10px;
+  padding: 2rem;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  flex-basis: 600px;
+  flex-grow: 0.5;
+  flex-shrink: 0;
+  font-weight: 600;
+  background-color: #284b5e;
+  color: white;
+}
+
+.movie-summary p {
+  font-weight: 400;
+  word-break: keep-all;
+  line-height: 1.5rem;
+}
