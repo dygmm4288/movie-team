@@ -2,6 +2,7 @@
 // 이 script는 Header UI와 검색 기능을 담당하고 있습니다 //
 ////////////////////////////////////////////////////
 
+import { searchMovies } from '../tmdb.js';
 import { select, selectAll } from '../util.js';
 import { validateBasic } from '../validation.js';
 
