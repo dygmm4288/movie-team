@@ -1,4 +1,4 @@
-import { handleLocation } from "./page.js";
+import { handleLocation, renderHome } from "./page.js";
 import { getStorage, setStorage } from "./storage.js";
 import { append, create, select } from "./util.js";
 
@@ -85,6 +85,8 @@ function showMovies(movies) {
 
     append(main, movieEl);
   }
+  history.pushState("home", null, "/");
+  renderHome();
 }
 
 export function searchMovies(url, inputValue) {
@@ -92,7 +94,7 @@ export function searchMovies(url, inputValue) {
   getFetch(url).then(({ results: movies }) => {
     for (let i = 0; i < movies.length; i++) {
       const item = movies[i];
-      if (!item.title.toLowerCase().includes(inputValue.toLowerCase()))
+      if (!item.title.toLowerCase().includes(inputValue?.toLowerCase()))
         continue;
       filtered.push(item);
     }
@@ -100,7 +102,7 @@ export function searchMovies(url, inputValue) {
     if (filtered.length === 0) {
       showMovies(movies);
 
-      return alert("일치하는 결과가 없습니다!");
+      return inputValue ? alert("일치하는 결과가 없습니다!") : null;
     }
     showMovies(filtered);
   });
