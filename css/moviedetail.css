@@ -137,6 +137,11 @@
 
 .text-gap {
   margin-right: 1.5rem;
+  color: white;
+}
+
+.movie-card {
+  width: 100%;
 }
 
 .movie-summary {

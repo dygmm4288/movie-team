@@ -4,7 +4,7 @@ export function routing(router) {
   // 경로에 맞는 랜더함수를 실행시킨다.
   const matched = router.find((v) => pathname === v.path);
   if (!matched) {
-    console.log('not matched');
+    console.error('not matched');
     return;
   }
   return matched.render();

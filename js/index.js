@@ -1,25 +1,17 @@
-import { Comment } from './comment/Comment.js';
-import { CommentList } from './comment/CommentList.js';
-import { handleLocation, renderHome, renderMovieDetail } from './page.js';
-import { routing } from './router.js';
-import { showDetail } from './slider/slider.js';
-import { append } from './util.js';
-import { getStorage, setStorage } from './storage.js';
-
-export const API_KEY = 'api_key=c929b1fb9912e2f89022f61946d45cac';
-export const BASE_URL = 'https://api.themoviedb.org/3';
-const API_URL = BASE_URL + '/discover/movie?sort_by=popularity.desc&' + API_KEY;
-const IMG_URL = 'https://image.tmdb.org/t/p/w500';
+import { Comment } from "./comment/Comment.js";
+import { CommentList } from "./comment/CommentList.js";
+import { renderHome, renderMovieDetail } from "./page.js";
+import { routing } from "./router.js";
+import { showDetail } from "./slider/slider.js";
+import { API_KEY, API_URL, BASE_URL, getMovies } from "./tmdb.js";
+import { append } from "./util.js";
 
 // Variables
-const orderRateBtn = document.querySelector('.order-rate');
-const orderAlphabetBtn = document.querySelector('.order-alphabet');
-const resetBtn = document.querySelector('.order-init');
 
-getMovies(API_URL);
+// getMovies(API_URL);
 
 // 영화 가져오는 함수
-function getMovies(url) {
+/* function getMovies(url) {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
@@ -46,10 +38,10 @@ function getMovies(url) {
         showMovies(sortedByAlpha)
       );
     });
-}
+} */
 
 // 영화 검색하는 함수
-export function searchMovies(url, inputValue) {
+/* export function searchMovies(url, inputValue) {
   main.innerHTML = ''; // 함수가 실행될때마다 html을 빈 문자열로 설정
   fetch(url)
     .then((res) => res.json())
@@ -70,9 +62,9 @@ export function searchMovies(url, inputValue) {
         showMovies(filtered);
       }
     });
-}
+} */
 
-function showMovies(data) {
+/* function showMovies(data) {
   main.innerHTML = '';
   let i = 0;
   while (i < data.length) {
@@ -121,42 +113,38 @@ function showMovies(data) {
     });
   }
 
-}
+}*/
 // 상세 페이지 좋아요 버튼
-$('.cardlist-content').click(function () {
+/* $('.cardlist-content').click(function () {
   var btn = $(this);
   var id_val = btn.prop('id');
   $('#' + id_val + '>.cardlist-content').toggleClass("heart-active")
   $('#' + id_val + '>.cardlist-num').toggleClass("heart-active")
   $('#' + id_val + '>.cardlist-heart').toggleClass("heart-active")
   setStorage('like', id_val)
-});
-
-
-
-
-
+}); */
 
 // 디테일 페이지
 
-renderHome();
+/* SPA Router 관련 기능들  */
 export const router = [
   {
-    path: '/',
+    path: "/",
     render: () => {
       renderHome();
     },
   },
   {
-    path: '/detail',
+    path: "/detail",
     render: async () => {
-      const movieId = new URLSearchParams(location.search).get('movieId');
+      const movieId = new URLSearchParams(location.search).get("movieId");
       const movie = await fetch(
         BASE_URL + `/movie/${movieId}?language=en-US&` + API_KEY,
       ).then((response) => response.json());
       const images = await fetch(
         BASE_URL + `/movie/${movieId}/images?` + API_KEY,
       ).then((response) => response.json());
+
       const commentList = new CommentList(movieId).render();
       const commentForm = new Comment(movieId).render();
 
@@ -168,19 +156,18 @@ export const router = [
     },
   },
 ];
-document.querySelectorAll('a').forEach((elem) =>
-  elem.addEventListener('click', (e) => {
-    if (e.target.matches('[data-link]')) {
+document.querySelectorAll("a").forEach((elem) =>
+  elem.addEventListener("click", (e) => {
+    if (e.target.matches("[data-link]")) {
       e.preventDefault();
       history.pushState(e.target.href, null, e.target.href);
       routing(router);
     }
   }),
 );
-window.addEventListener('popstate', (e) => {
-  console.log(e, e.state);
+window.addEventListener("popstate", (e) => {
   switch (e.state) {
-    case '/':
+    case "/":
       renderHome();
       break;
     default:
@@ -188,5 +175,9 @@ window.addEventListener('popstate', (e) => {
       break;
   }
 });
+if (window.location.href.slice(-4) === "html") {
+  window.location.href = window.location.href.slice(0, -10);
+}
 
-console.log(window.location);
+renderHome();
+getMovies(API_URL);
