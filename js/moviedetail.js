@@ -59,5 +59,6 @@ export function movieDetail(movie) {
       clearTimeout(timeout);
     }, 1000);
   });
+
   return $movieDetail;
 }
