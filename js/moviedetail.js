@@ -30,12 +30,11 @@ export function movieDetail({
     <div class="text-body">
       <div><span class="text-gap">영화제목</span><span>${title}</span></div>
       <div><span>영화개봉일</span><span>${release_date}</span></div>
-      <div><span class="text-gap">영화장르</span><span>${
-        genres[0].name
-      }</span></div>
+      <div><span class="text-gap">영화장르</span><span>${genres[0].name
+    }</span></div>
       <div><span class="text-gap">영화평점</span><span>★ ${Number(
-        vote_average,
-      ).toFixed(1)}</span></div>
+      vote_average,
+    ).toFixed(1)}</span></div>
     </div>
 </div>
   </div>
@@ -76,5 +75,6 @@ export function movieDetail({
       clearTimeout(timeout);
     }, 1000);
   });
+
   return $movieDetail;
 }

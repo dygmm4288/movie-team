@@ -38,9 +38,13 @@ body {
   background-color: #284b5e;
 }
 
-.logo h1 > a {
+.logo h1>a {
   text-decoration: none;
   color: var(--md-sys-color-secondary);
+}
+
+.search-container {
+  padding-right: 12rem;
 }
 
 .search-container input {
