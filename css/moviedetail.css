@@ -118,12 +118,14 @@
     opacity: 0;
   }
 }
+
 .movie-body {
   width: 100%;
   height: 250px;
   padding: 1rem;
   white-space: nowrap;
 }
+
 .text-body div {
   display: flex;
   align-items: center;

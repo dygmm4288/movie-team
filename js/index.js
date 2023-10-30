@@ -1,143 +1,23 @@
-import { Comment } from './comment/Comment.js';
-import { CommentList } from './comment/CommentList.js';
-import { renderHome, renderMovieDetail } from './page.js';
-import { routing } from './router.js';
-import { showDetail } from './slider/slider.js';
-import { API_KEY, API_URL, BASE_URL, getMovies } from './tmdb.js';
-import { append } from './util.js';
-
-// Variables
-
-// getMovies(API_URL);
-
-// 영화 가져오는 함수
-/* function getMovies(url) {
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-      // 초기 화면
-      console.log(data);
-      showMovies(data.results);
-
-      // 평점순 정렬 데이터 ->
-      let sortedByRate = [...data.results].sort((a, b) => {
-        return b.vote_average - a.vote_average;
-      });
-
-      // 가나다순 정렬 데이터
-      let sortedByAlpha = data.results.slice(0).sort((a, b) => {
-        const upperCaseA = a.title.toUpperCase();
-        const upperCaseB = b.title.toUpperCase();
-        return upperCaseA > upperCaseB ? 1 : upperCaseA < upperCaseB ? -1 : 0;
-      });
-
-      // 각각의 정렬 버튼 클릭 시 함수 실행
-      resetBtn.addEventListener('click', () => showMovies(data.results)); // 기본
-      orderRateBtn.addEventListener('click', () => showMovies(sortedByRate));
-      orderAlphabetBtn.addEventListener('click', () =>
-        showMovies(sortedByAlpha)
-      );
-    });
-} */
-
-// 영화 검색하는 함수
-/* export function searchMovies(url, inputValue) {
-  main.innerHTML = ''; // 함수가 실행될때마다 html을 빈 문자열로 설정
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-      const filtered = [];
-      for (let i = 0; i < data.results.length; i++) {
-        const item = data.results[i];
-        if (!item.title.toLowerCase().includes(`${inputValue}`)) {
-          continue;
-        }
-        filtered.push(item);
-      }
-
-      if (filtered.length === 0) {
-        showMovies([...data.results]);
-        alert('일치하는 결과가 없습니다');
-      } else {
-        showMovies(filtered);
-      }
-    });
-} */
-
-/* function showMovies(data) {
-  main.innerHTML = '';
-  let i = 0;
-  while (i < data.length) {
-    const movie = data[i++];
-    const { title, poster_path, vote_average, overview, id } = movie;
-    const movieEl = document.createElement('div');
-    movieEl.classList.add('movie');
-
-    movieEl.dataset.vote_score = vote_average;
-    movieEl.innerHTML = `
-    <div class="cardlist-heart-btn">
-    <div class="cardlist-content" id = "${id}">
-      <span class="cardlist-heart"></span>
-      <span class="cardlist-num"></span>
-    </div>
-    </div>
-    <img src="${IMG_URL + poster_path}" alt="${title}">
-    <div class="cardlist-movie-info">
-      <h3>${title}</h3>
-      <span>평점: ${String(vote_average).padEnd(2)}</span>
-    </div>
-      <div class="cardlist-overview">
-        ${overview}
-      </div>
-    `;
-
-    main.appendChild(movieEl);
-    Array.from(movieEl.childNodes)[3].addEventListener('click', handleLocation(`detail?movieId=${id}`))
-
-    const cardlistHeart = movieEl.querySelector('.cardlist-heart');
-
-    if (new Set(getStorage('likes') || []).has(id)) {
-      cardlistHeart.classList.add('heart-active');
-    }
-
-    cardlistHeart.addEventListener('click', () => {
-      if (cardlistHeart.classList.contains('heart-active')) {
-        setStorage(
-          'likes',
-          [...new Set(getStorage('likes') || [])].filter((v) => v !== id),
-        );
-      } else {
-        setStorage('likes', [...new Set(getStorage('likes'))].concat(id));
-      }
-      cardlistHeart.classList.toggle('heart-active');
-    });
-  }
-
-}*/
-// 상세 페이지 좋아요 버튼
-/* $('.cardlist-content').click(function () {
-  var btn = $(this);
-  var id_val = btn.prop('id');
-  $('#' + id_val + '>.cardlist-content').toggleClass("heart-active")
-  $('#' + id_val + '>.cardlist-num').toggleClass("heart-active")
-  $('#' + id_val + '>.cardlist-heart').toggleClass("heart-active")
-  setStorage('like', id_val)
-}); */
-
-// 디테일 페이지
+import { Comment } from "./comment/Comment.js";
+import { CommentList } from "./comment/CommentList.js";
+import { renderHome, renderMovieDetail } from "./page.js";
+import { routing } from "./router.js";
+import { showDetail } from "./slider/slider.js";
+import { API_KEY, API_URL, BASE_URL, getMovies } from "./tmdb.js";
+import { append } from "./util.js";
 
 /* SPA Router 관련 기능들  */
 export const router = [
   {
-    path: '/',
+    path: "/",
     render: () => {
       renderHome();
     },
   },
   {
-    path: '/detail',
+    path: "/detail",
     render: async () => {
-      const movieId = new URLSearchParams(location.search).get('movieId');
+      const movieId = new URLSearchParams(location.search).get("movieId");
       const movie = await fetch(
         BASE_URL + `/movie/${movieId}?language=en-US&` + API_KEY,
       ).then((response) => response.json());
@@ -156,18 +36,18 @@ export const router = [
     },
   },
 ];
-document.querySelectorAll('a').forEach((elem) =>
-  elem.addEventListener('click', (e) => {
-    if (e.target.matches('[data-link]')) {
+document.querySelectorAll("a").forEach((elem) =>
+  elem.addEventListener("click", (e) => {
+    if (e.target.matches("[data-link]")) {
       e.preventDefault();
       history.pushState(e.target.href, null, e.target.href);
       routing(router);
     }
   }),
 );
-window.addEventListener('popstate', (e) => {
+window.addEventListener("popstate", (e) => {
   switch (e.state) {
-    case '/':
+    case "/":
       renderHome();
       break;
     default:
@@ -175,6 +55,11 @@ window.addEventListener('popstate', (e) => {
       break;
   }
 });
+if (window.location.href.slice(-4) === "html") {
+  window.location.href = window.location.href.slice(0, -10);
+}
 
-renderHome();
-getMovies(API_URL);
+window.onload = () => {
+  renderHome();
+  getMovies(API_URL);
+};

@@ -1,12 +1,12 @@
-import { handleLocation } from './page.js';
-import { getStorage, setStorage } from './storage.js';
-import { append, create, select } from './util.js';
+import { handleLocation, renderHome } from "./page.js";
+import { getStorage, setStorage } from "./storage.js";
+import { append, create, select } from "./util.js";
 
-export const API_KEY = 'api_key=c929b1fb9912e2f89022f61946d45cac';
-export const BASE_URL = 'https://api.themoviedb.org/3';
+export const API_KEY = "api_key=c929b1fb9912e2f89022f61946d45cac";
+export const BASE_URL = "https://api.themoviedb.org/3";
 export const API_URL =
-  BASE_URL + '/discover/movie?sort_by=popularity.desc&' + API_KEY;
-const IMG_URL = 'https://image.tmdb.org/t/p/w500';
+  BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY;
+const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
 async function getFetch(url) {
   try {
@@ -30,9 +30,9 @@ export function getMovies(url) {
       return upperCaseA > upperCaseB ? 1 : upperCaseA < upperCaseB ? -1 : 0;
     });
 
-    const orderRateBtn = select('.order-rate');
-    const orderAlphabetBtn = select('.order-alphabet');
-    const resetBtn = select('.order-init');
+    const orderRateBtn = select(".order-rate");
+    const orderAlphabetBtn = select(".order-alphabet");
+    const resetBtn = select(".order-init");
 
     const matched = new Map();
     matched.set(orderRateBtn, sortedByRate);
@@ -40,7 +40,7 @@ export function getMovies(url) {
     matched.set(resetBtn, movies);
 
     [orderRateBtn, orderAlphabetBtn, resetBtn].forEach((btn) => {
-      btn.addEventListener('click', () => showMovies(matched.get(btn)));
+      btn.addEventListener("click", () => showMovies(matched.get(btn)));
     });
 
     showMovies(movies);
@@ -48,15 +48,15 @@ export function getMovies(url) {
 }
 
 function showMovies(movies) {
-  const main = select('#main');
-  main.innerHTML = '';
+  const main = select("#main");
+  main.innerHTML = "";
   let i = 0;
 
   while (i < movies.length) {
     const movie = movies[i++];
     const { title, poster_path, vote_average, overview, id } = movie;
 
-    const movieEl = create('div', 'movie');
+    const movieEl = create("div", "movie");
     movieEl.dataset.voteScore = vote_average;
 
     movieEl.innerHTML = `
@@ -76,50 +76,52 @@ function showMovies(movies) {
     `;
 
     Array.from(movieEl.childNodes)[3].addEventListener(
-      'click',
+      "click",
       handleLocation(`detail?movieId=${id}`),
     );
 
     // 이벤트 등록
-    handleClickCardListHeart(movieEl.querySelector('.cardlist-heart'), id);
+    handleClickCardListHeart(movieEl.querySelector(".cardlist-heart"), id);
 
     append(main, movieEl);
   }
+  history.pushState("home", null, "/");
+  renderHome();
 }
 
 export function searchMovies(url, inputValue) {
   const filtered = [];
-  const nextIds = [...new Set([...likes].concat(id))];
   getFetch(url).then(({ results: movies }) => {
     for (let i = 0; i < movies.length; i++) {
       const item = movies[i];
-      if (!item.title.toLowerCase().includes(inputValue)) continue;
+      if (!item.title.toLowerCase().includes(inputValue?.toLowerCase()))
+        continue;
       filtered.push(item);
     }
 
     if (filtered.length === 0) {
       showMovies(movies);
 
-      return alert('일치하는 결과가 없습니다!');
+      return inputValue ? alert("일치하는 결과가 없습니다!") : null;
     }
     showMovies(filtered);
   });
 }
 
 function handleClickCardListHeart(cardListHeart, id) {
-  const likes = new Set(getStorage('likes') || []);
-  if (likes.has(id)) cardListHeart.classList.add('heart-active');
+  const likes = new Set(getStorage("likes") || []);
+  if (likes.has(id)) cardListHeart.classList.add("heart-active");
 
-  cardListHeart.addEventListener('click', function () {
-    if (cardListHeart.classList.contains('heart-active')) {
+  cardListHeart.addEventListener("click", function () {
+    if (cardListHeart.classList.contains("heart-active")) {
       const removedIds = [
         ...new Set([...likes].filter((likeId) => likeId !== id)),
       ];
-      setStorage('likes', removedIds);
+      setStorage("likes", removedIds);
     } else {
       const nextIds = [...new Set([...likes].concat(id))];
-      setStorage('likes', nextIds);
+      setStorage("likes", nextIds);
     }
-    cardListHeart.classList.toggle('heart-active');
+    cardListHeart.classList.toggle("heart-active");
   });
 }
